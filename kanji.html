@@ -4,11 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kanji N5 | Catatan Bahasa Jepang</title>
-  <meta name="description" content="Daftar kanji JLPT N5 lengkap dengan on'yomi, kun'yomi, dan arti. Siap untuk review.">
+  <meta name="description" content="Kanji JLPT N5 (±109) selaras dengan bank kuis. Arti untuk review cepat.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .kanji-table { width: 100%; border-collapse: collapse; }
+    .kanji-table th, .kanji-table td {
+      text-align: left; padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--border);
+    }
+    .kanji-table th { color: var(--text-muted); font-size: 0.8rem; }
+    .kanji-cell {
+      font-family: var(--font-serif); font-size: 1.6rem; color: var(--primary);
+      width: 3.5rem;
+    }
+    .table-wrap {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow);
+    }
+    .search-box {
+      width: 100%; max-width: 360px; padding: 0.6rem 0.85rem; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 1rem; margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -37,158 +56,127 @@
     <section class="section">
       <div class="container">
         <h1>Kanji N5</h1>
-        <p class="lead mb-2">±80–100 kanji inti JLPT N5. Fokus kenali dulu (baca + arti). Menulis stroke order bisa dilatih terpisah. N4/N3 menyusul setelah ini solid.</p>
-
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="numbers">Angka & Waktu</button>
-          <button class="tab-btn" data-tab="nature">Alam & Arah</button>
-          <button class="tab-btn" data-tab="people">Orang & Tubuh</button>
-          <button class="tab-btn" data-tab="action">Kata Kerja & Lainnya</button>
+        <p class="lead mb-2">±109 kanji inti. Daftar ini selaras dengan mode <strong>Kanji N5</strong> di halaman Kuis. Untuk stroke order, buka <a href="writing.html">Latihan Menulis</a>.</p>
+        <input type="search" class="search-box" id="kanji-search" placeholder="Cari kanji / arti…" autocomplete="off">
+        <div class="table-wrap">
+          <table class="kanji-table">
+            <thead><tr><th>漢字</th><th>Arti</th></tr></thead>
+            <tbody>
+            <tr><td class="kanji-cell">一</td><td>satu</td></tr>
+            <tr><td class="kanji-cell">二</td><td>dua</td></tr>
+            <tr><td class="kanji-cell">三</td><td>tiga</td></tr>
+            <tr><td class="kanji-cell">四</td><td>empat</td></tr>
+            <tr><td class="kanji-cell">五</td><td>lima</td></tr>
+            <tr><td class="kanji-cell">六</td><td>enam</td></tr>
+            <tr><td class="kanji-cell">七</td><td>tujuh</td></tr>
+            <tr><td class="kanji-cell">八</td><td>delapan</td></tr>
+            <tr><td class="kanji-cell">九</td><td>sembilan</td></tr>
+            <tr><td class="kanji-cell">十</td><td>sepuluh</td></tr>
+            <tr><td class="kanji-cell">百</td><td>seratus</td></tr>
+            <tr><td class="kanji-cell">千</td><td>seribu</td></tr>
+            <tr><td class="kanji-cell">万</td><td>sepuluh ribu</td></tr>
+            <tr><td class="kanji-cell">円</td><td>yen</td></tr>
+            <tr><td class="kanji-cell">時</td><td>waktu / jam</td></tr>
+            <tr><td class="kanji-cell">日</td><td>hari / matahari</td></tr>
+            <tr><td class="kanji-cell">月</td><td>bulan</td></tr>
+            <tr><td class="kanji-cell">火</td><td>api</td></tr>
+            <tr><td class="kanji-cell">水</td><td>air</td></tr>
+            <tr><td class="kanji-cell">木</td><td>pohon</td></tr>
+            <tr><td class="kanji-cell">金</td><td>emas / uang</td></tr>
+            <tr><td class="kanji-cell">土</td><td>tanah</td></tr>
+            <tr><td class="kanji-cell">人</td><td>orang</td></tr>
+            <tr><td class="kanji-cell">男</td><td>laki-laki</td></tr>
+            <tr><td class="kanji-cell">女</td><td>perempuan</td></tr>
+            <tr><td class="kanji-cell">子</td><td>anak</td></tr>
+            <tr><td class="kanji-cell">父</td><td>ayah</td></tr>
+            <tr><td class="kanji-cell">母</td><td>ibu</td></tr>
+            <tr><td class="kanji-cell">友</td><td>teman</td></tr>
+            <tr><td class="kanji-cell">口</td><td>mulut</td></tr>
+            <tr><td class="kanji-cell">目</td><td>mata</td></tr>
+            <tr><td class="kanji-cell">耳</td><td>telinga</td></tr>
+            <tr><td class="kanji-cell">手</td><td>tangan</td></tr>
+            <tr><td class="kanji-cell">足</td><td>kaki</td></tr>
+            <tr><td class="kanji-cell">頭</td><td>kepala</td></tr>
+            <tr><td class="kanji-cell">体</td><td>tubuh</td></tr>
+            <tr><td class="kanji-cell">心</td><td>hati</td></tr>
+            <tr><td class="kanji-cell">力</td><td>kekuatan</td></tr>
+            <tr><td class="kanji-cell">大</td><td>besar</td></tr>
+            <tr><td class="kanji-cell">小</td><td>kecil</td></tr>
+            <tr><td class="kanji-cell">中</td><td>tengah</td></tr>
+            <tr><td class="kanji-cell">上</td><td>atas</td></tr>
+            <tr><td class="kanji-cell">下</td><td>bawah</td></tr>
+            <tr><td class="kanji-cell">左</td><td>kiri</td></tr>
+            <tr><td class="kanji-cell">右</td><td>kanan</td></tr>
+            <tr><td class="kanji-cell">前</td><td>depan</td></tr>
+            <tr><td class="kanji-cell">後</td><td>belakang</td></tr>
+            <tr><td class="kanji-cell">外</td><td>luar</td></tr>
+            <tr><td class="kanji-cell">内</td><td>dalam</td></tr>
+            <tr><td class="kanji-cell">間</td><td>antara</td></tr>
+            <tr><td class="kanji-cell">東</td><td>timur</td></tr>
+            <tr><td class="kanji-cell">西</td><td>barat</td></tr>
+            <tr><td class="kanji-cell">南</td><td>selatan</td></tr>
+            <tr><td class="kanji-cell">北</td><td>utara</td></tr>
+            <tr><td class="kanji-cell">名</td><td>nama</td></tr>
+            <tr><td class="kanji-cell">山</td><td>gunung</td></tr>
+            <tr><td class="kanji-cell">川</td><td>sungai</td></tr>
+            <tr><td class="kanji-cell">田</td><td>sawah</td></tr>
+            <tr><td class="kanji-cell">天</td><td>langit</td></tr>
+            <tr><td class="kanji-cell">気</td><td>udara / semangat</td></tr>
+            <tr><td class="kanji-cell">空</td><td>langit / kosong</td></tr>
+            <tr><td class="kanji-cell">雨</td><td>hujan</td></tr>
+            <tr><td class="kanji-cell">電</td><td>listrik</td></tr>
+            <tr><td class="kanji-cell">車</td><td>kendaraan</td></tr>
+            <tr><td class="kanji-cell">駅</td><td>stasiun</td></tr>
+            <tr><td class="kanji-cell">社</td><td>perusahaan / kuil</td></tr>
+            <tr><td class="kanji-cell">校</td><td>sekolah</td></tr>
+            <tr><td class="kanji-cell">学</td><td>belajar</td></tr>
+            <tr><td class="kanji-cell">先</td><td>sebelum</td></tr>
+            <tr><td class="kanji-cell">生</td><td>hidup</td></tr>
+            <tr><td class="kanji-cell">年</td><td>tahun</td></tr>
+            <tr><td class="kanji-cell">午</td><td>siang</td></tr>
+            <tr><td class="kanji-cell">今</td><td>sekarang</td></tr>
+            <tr><td class="kanji-cell">何</td><td>apa</td></tr>
+            <tr><td class="kanji-cell">行</td><td>pergi</td></tr>
+            <tr><td class="kanji-cell">来</td><td>datang</td></tr>
+            <tr><td class="kanji-cell">出</td><td>keluar</td></tr>
+            <tr><td class="kanji-cell">入</td><td>masuk</td></tr>
+            <tr><td class="kanji-cell">見</td><td>melihat</td></tr>
+            <tr><td class="kanji-cell">聞</td><td>mendengar</td></tr>
+            <tr><td class="kanji-cell">読</td><td>membaca</td></tr>
+            <tr><td class="kanji-cell">書</td><td>menulis</td></tr>
+            <tr><td class="kanji-cell">話</td><td>berbicara</td></tr>
+            <tr><td class="kanji-cell">語</td><td>bahasa</td></tr>
+            <tr><td class="kanji-cell">食</td><td>makan</td></tr>
+            <tr><td class="kanji-cell">飲</td><td>minum</td></tr>
+            <tr><td class="kanji-cell">買</td><td>membeli</td></tr>
+            <tr><td class="kanji-cell">立</td><td>berdiri</td></tr>
+            <tr><td class="kanji-cell">休</td><td>istirahat</td></tr>
+            <tr><td class="kanji-cell">会</td><td>bertemu</td></tr>
+            <tr><td class="kanji-cell">国</td><td>negara</td></tr>
+            <tr><td class="kanji-cell">文</td><td>kalimat / tulisan</td></tr>
+            <tr><td class="kanji-cell">本</td><td>buku</td></tr>
+            <tr><td class="kanji-cell">半</td><td>setengah</td></tr>
+            <tr><td class="kanji-cell">毎</td><td>setiap</td></tr>
+            <tr><td class="kanji-cell">週</td><td>minggu</td></tr>
+            <tr><td class="kanji-cell">曜</td><td>hari (dalam minggu)</td></tr>
+            <tr><td class="kanji-cell">分</td><td>menit</td></tr>
+            <tr><td class="kanji-cell">高</td><td>tinggi / mahal</td></tr>
+            <tr><td class="kanji-cell">安</td><td>murah / aman</td></tr>
+            <tr><td class="kanji-cell">新</td><td>baru</td></tr>
+            <tr><td class="kanji-cell">古</td><td>lama</td></tr>
+            <tr><td class="kanji-cell">多</td><td>banyak</td></tr>
+            <tr><td class="kanji-cell">少</td><td>sedikit</td></tr>
+            <tr><td class="kanji-cell">長</td><td>panjang</td></tr>
+            <tr><td class="kanji-cell">白</td><td>putih</td></tr>
+            <tr><td class="kanji-cell">青</td><td>biru</td></tr>
+            <tr><td class="kanji-cell">赤</td><td>merah</td></tr>
+            <tr><td class="kanji-cell">花</td><td>bunga</td></tr>
+            </tbody>
+          </table>
         </div>
-
-        <!-- NUMBERS -->
-        <div id="numbers" class="tab-panel active">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th>Kanji</th><th>On</th><th>Kun</th><th>Arti</th><th>Contoh</th></tr>
-              </thead>
-              <tbody>
-                <tr><td class="kana-char">一</td><td>イチ</td><td>ひと(つ)</td><td>satu</td><td>一人、一つ</td></tr>
-                <tr><td class="kana-char">二</td><td>ニ</td><td>ふた(つ)</td><td>dua</td><td>二人、二つ</td></tr>
-                <tr><td class="kana-char">三</td><td>サン</td><td>み(つ)</td><td>tiga</td><td>三日、三つ</td></tr>
-                <tr><td class="kana-char">四</td><td>シ</td><td>よ(つ)・よん</td><td>empat</td><td>四日、四つ</td></tr>
-                <tr><td class="kana-char">五</td><td>ゴ</td><td>いつ(つ)</td><td>lima</td><td>五日、五つ</td></tr>
-                <tr><td class="kana-char">六</td><td>ロク</td><td>む(つ)</td><td>enam</td><td>六日、六つ</td></tr>
-                <tr><td class="kana-char">七</td><td>シチ</td><td>なな(つ)</td><td>tujuh</td><td>七日、七つ</td></tr>
-                <tr><td class="kana-char">八</td><td>ハチ</td><td>や(つ)</td><td>delapan</td><td>八日、八つ</td></tr>
-                <tr><td class="kana-char">九</td><td>キュウ・ク</td><td>ここの(つ)</td><td>sembilan</td><td>九日、九つ</td></tr>
-                <tr><td class="kana-char">十</td><td>ジュウ</td><td>とお</td><td>sepuluh</td><td>十日、十</td></tr>
-                <tr><td class="kana-char">百</td><td>ヒャク</td><td>—</td><td>seratus</td><td>百円</td></tr>
-                <tr><td class="kana-char">千</td><td>セン</td><td>ち</td><td>seribu</td><td>千円</td></tr>
-                <tr><td class="kana-char">万</td><td>マン</td><td>—</td><td>sepuluh ribu</td><td>一万</td></tr>
-                <tr><td class="kana-char">円</td><td>エン</td><td>—</td><td>yen / lingkaran</td><td>百円</td></tr>
-                <tr><td class="kana-char">日</td><td>ニチ・ジツ</td><td>ひ・か</td><td>hari / matahari</td><td>日曜日、今日</td></tr>
-                <tr><td class="kana-char">月</td><td>ゲツ・ガツ</td><td>つき</td><td>bulan</td><td>月曜日、一月</td></tr>
-                <tr><td class="kana-char">時</td><td>ジ</td><td>とき</td><td>waktu / jam</td><td>時間、一時</td></tr>
-                <tr><td class="kana-char">分</td><td>フン・ブン</td><td>わ(ける)</td><td>menit / bagian</td><td>三分、分かる</td></tr>
-                <tr><td class="kana-char">年</td><td>ネン</td><td>とし</td><td>tahun</td><td>今年、三年</td></tr>
-                <tr><td class="kana-char">今</td><td>コン</td><td>いま</td><td>sekarang</td><td>今日、今週</td></tr>
-                <tr><td class="kana-char">先</td><td>セン</td><td>さき</td><td>sebelum / ujung</td><td>先生、先週</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- NATURE -->
-        <div id="nature" class="tab-panel">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th>Kanji</th><th>On</th><th>Kun</th><th>Arti</th><th>Contoh</th></tr>
-              </thead>
-              <tbody>
-                <tr><td class="kana-char">火</td><td>カ</td><td>ひ</td><td>api</td><td>火曜日、花火</td></tr>
-                <tr><td class="kana-char">水</td><td>スイ</td><td>みず</td><td>air</td><td>水曜日、水</td></tr>
-                <tr><td class="kana-char">木</td><td>モク・ボク</td><td>き</td><td>pohon / kayu</td><td>木曜日、木</td></tr>
-                <tr><td class="kana-char">金</td><td>キン</td><td>かね</td><td>emas / uang</td><td>金曜日、お金</td></tr>
-                <tr><td class="kana-char">土</td><td>ド・ト</td><td>つち</td><td>tanah</td><td>土曜日、土地</td></tr>
-                <tr><td class="kana-char">山</td><td>サン</td><td>やま</td><td>gunung</td><td>山、富士山</td></tr>
-                <tr><td class="kana-char">川</td><td>セン</td><td>かわ</td><td>sungai</td><td>川、河川</td></tr>
-                <tr><td class="kana-char">田</td><td>デン</td><td>た</td><td>sawah</td><td>田中、水田</td></tr>
-                <tr><td class="kana-char">天</td><td>テン</td><td>あめ・あま</td><td>langit</td><td>天気、天国</td></tr>
-                <tr><td class="kana-char">気</td><td>キ</td><td>—</td><td>semangat / udara</td><td>元気、天気</td></tr>
-                <tr><td class="kana-char">雨</td><td>ウ</td><td>あめ</td><td>hujan</td><td>雨、大雨</td></tr>
-                <tr><td class="kana-char">東</td><td>トウ</td><td>ひがし</td><td>timur</td><td>東京、東口</td></tr>
-                <tr><td class="kana-char">西</td><td>セイ・サイ</td><td>にし</td><td>barat</td><td>西口</td></tr>
-                <tr><td class="kana-char">南</td><td>ナン</td><td>みなみ</td><td>selatan</td><td>南口</td></tr>
-                <tr><td class="kana-char">北</td><td>ホク</td><td>きた</td><td>utara</td><td>北口、北海道</td></tr>
-                <tr><td class="kana-char">上</td><td>ジョウ</td><td>うえ・あ(げる)</td><td>atas</td><td>上、上手</td></tr>
-                <tr><td class="kana-char">下</td><td>カ・ゲ</td><td>した・さ(がる)</td><td>bawah</td><td>下、地下鉄</td></tr>
-                <tr><td class="kana-char">中</td><td>チュウ</td><td>なか</td><td>tengah / dalam</td><td>中、中国</td></tr>
-                <tr><td class="kana-char">外</td><td>ガイ</td><td>そと</td><td>luar</td><td>外国、外</td></tr>
-                <tr><td class="kana-char">前</td><td>ゼン</td><td>まえ</td><td>depan / sebelum</td><td>前、名前</td></tr>
-                <tr><td class="kana-char">後</td><td>ゴ・コウ</td><td>あと・うし(ろ)</td><td>belakang / setelah</td><td>後、午後</td></tr>
-                <tr><td class="kana-char">左</td><td>サ</td><td>ひだり</td><td>kiri</td><td>左、左手</td></tr>
-                <tr><td class="kana-char">右</td><td>ウ・ユウ</td><td>みぎ</td><td>kanan</td><td>右、右手</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- PEOPLE -->
-        <div id="people" class="tab-panel">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th>Kanji</th><th>On</th><th>Kun</th><th>Arti</th><th>Contoh</th></tr>
-              </thead>
-              <tbody>
-                <tr><td class="kana-char">人</td><td>ジン・ニン</td><td>ひと</td><td>orang</td><td>人、日本人</td></tr>
-                <tr><td class="kana-char">男</td><td>ダン・ナン</td><td>おとこ</td><td>laki-laki</td><td>男、男性</td></tr>
-                <tr><td class="kana-char">女</td><td>ジョ・ニョ</td><td>おんな</td><td>perempuan</td><td>女、女性</td></tr>
-                <tr><td class="kana-char">子</td><td>シ・ス</td><td>こ</td><td>anak</td><td>子供、女子</td></tr>
-                <tr><td class="kana-char">父</td><td>フ</td><td>ちち</td><td>ayah</td><td>父、お父さん</td></tr>
-                <tr><td class="kana-char">母</td><td>ボ</td><td>はは</td><td>ibu</td><td>母、お母さん</td></tr>
-                <tr><td class="kana-char">友</td><td>ユウ</td><td>とも</td><td>teman</td><td>友達</td></tr>
-                <tr><td class="kana-char">名</td><td>メイ・ミョウ</td><td>な</td><td>nama</td><td>名前、有名</td></tr>
-                <tr><td class="kana-char">口</td><td>コウ</td><td>くち</td><td>mulut</td><td>入口、出口</td></tr>
-                <tr><td class="kana-char">目</td><td>モク</td><td>め</td><td>mata</td><td>目、一目</td></tr>
-                <tr><td class="kana-char">耳</td><td>ジ</td><td>みみ</td><td>telinga</td><td>耳</td></tr>
-                <tr><td class="kana-char">手</td><td>シュ</td><td>て</td><td>tangan</td><td>手、上手</td></tr>
-                <tr><td class="kana-char">足</td><td>ソク</td><td>あし</td><td>kaki</td><td>足</td></tr>
-                <tr><td class="kana-char">力</td><td>リョク・リキ</td><td>ちから</td><td>kekuatan</td><td>力、電力</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- ACTION -->
-        <div id="action" class="tab-panel">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th>Kanji</th><th>On</th><th>Kun</th><th>Arti</th><th>Contoh</th></tr>
-              </thead>
-              <tbody>
-                <tr><td class="kana-char">見</td><td>ケン</td><td>み(る)</td><td>melihat</td><td>見る、見せる</td></tr>
-                <tr><td class="kana-char">聞</td><td>ブン・モン</td><td>き(く)</td><td>mendengar / bertanya</td><td>聞く、新聞</td></tr>
-                <tr><td class="kana-char">読</td><td>ドク</td><td>よ(む)</td><td>membaca</td><td>読む、読書</td></tr>
-                <tr><td class="kana-char">書</td><td>ショ</td><td>か(く)</td><td>menulis</td><td>書く、辞書</td></tr>
-                <tr><td class="kana-char">話</td><td>ワ</td><td>はな(す)</td><td>berbicara</td><td>話す、会話</td></tr>
-                <tr><td class="kana-char">食</td><td>ショク</td><td>た(べる)</td><td>makan</td><td>食べる、食事</td></tr>
-                <tr><td class="kana-char">飲</td><td>イン</td><td>の(む)</td><td>minum</td><td>飲む</td></tr>
-                <tr><td class="kana-char">買</td><td>バイ</td><td>か(う)</td><td>membeli</td><td>買う、買い物</td></tr>
-                <tr><td class="kana-char">行</td><td>コウ・ギョウ</td><td>い(く)</td><td>pergi</td><td>行く、旅行</td></tr>
-                <tr><td class="kana-char">来</td><td>ライ</td><td>く(る)</td><td>datang</td><td>来る、来年</td></tr>
-                <tr><td class="kana-char">出</td><td>シュツ</td><td>で(る)</td><td>keluar</td><td>出る、出口</td></tr>
-                <tr><td class="kana-char">入</td><td>ニュウ</td><td>はい(る)・い(れる)</td><td>masuk</td><td>入る、入口</td></tr>
-                <tr><td class="kana-char">休</td><td>キュウ</td><td>やす(む)</td><td>istirahat</td><td>休む、休み</td></tr>
-                <tr><td class="kana-char">生</td><td>セイ・ショウ</td><td>い(きる)</td><td>hidup / lahir</td><td>学生、先生、生きる</td></tr>
-                <tr><td class="kana-char">学</td><td>ガク</td><td>まな(ぶ)</td><td>belajar</td><td>学生、学校</td></tr>
-                <tr><td class="kana-char">校</td><td>コウ</td><td>—</td><td>sekolah</td><td>学校、高校</td></tr>
-                <tr><td class="kana-char">国</td><td>コク</td><td>くに</td><td>negara</td><td>国、中国、外国</td></tr>
-                <tr><td class="kana-char">語</td><td>ゴ</td><td>かた(る)</td><td>bahasa / kata</td><td>日本語、英語</td></tr>
-                <tr><td class="kana-char">何</td><td>カ</td><td>なに・なん</td><td>apa</td><td>何、何人</td></tr>
-                <tr><td class="kana-char">大</td><td>ダイ・タイ</td><td>おお(きい)</td><td>besar</td><td>大きい、大学</td></tr>
-                <tr><td class="kana-char">小</td><td>ショウ</td><td>ちい(さい)</td><td>kecil</td><td>小さい、小学生</td></tr>
-                <tr><td class="kana-char">高</td><td>コウ</td><td>たか(い)</td><td>tinggi / mahal</td><td>高い、高校</td></tr>
-                <tr><td class="kana-char">安</td><td>アン</td><td>やす(い)</td><td>murah / aman</td><td>安い、安心</td></tr>
-                <tr><td class="kana-char">新</td><td>シン</td><td>あたら(しい)</td><td>baru</td><td>新しい、新聞</td></tr>
-                <tr><td class="kana-char">古</td><td>コ</td><td>ふる(い)</td><td>tua / lama</td><td>古い</td></tr>
-                <tr><td class="kana-char">多</td><td>タ</td><td>おお(い)</td><td>banyak</td><td>多い</td></tr>
-                <tr><td class="kana-char">少</td><td>ショウ</td><td>すく(ない)・すこ(し)</td><td>sedikit</td><td>少ない、少し</td></tr>
-                <tr><td class="kana-char">電</td><td>デン</td><td>—</td><td>listrik</td><td>電気、電話、電車</td></tr>
-                <tr><td class="kana-char">車</td><td>シャ</td><td>くるま</td><td>kendaraan / mobil</td><td>車、電車</td></tr>
-                <tr><td class="kana-char">駅</td><td>エキ</td><td>—</td><td>stasiun</td><td>駅、東京駅</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
         <div class="card mt-2">
-          <h3>Cara review efektif</h3>
-          <p class="muted mb-0">Jangan hafal semua sekaligus. Pelajari 5–10 kanji per hari + contoh kata. Gunakan Anki. Setelah kenal bentuknya, baru fokus on/kun. N4 (±300 total) dan N3 (±650) baru disentuh setelah N5 benar-benar lancar.</p>
+          <h3>Catatan</h3>
+          <p class="muted mb-0">Fokus dulu kenali bentuk + arti. Bacaan on/kun detail bisa ditambah di catatan pribadi atau dari buku Minna. Uji di <a href="quiz.html">Kuis</a>.</p>
         </div>
       </div>
     </section>
@@ -198,5 +186,14 @@
     <div class="container"><p>Catatan Bahasa Jepang · Kanji N5</p></div>
   </footer>
   <script src="js/main.js"></script>
+  <script>
+    document.getElementById('kanji-search').addEventListener('input', function() {
+      var q = this.value.trim().toLowerCase();
+      document.querySelectorAll('.kanji-table tbody tr').forEach(function(tr) {
+        var t = tr.textContent.toLowerCase();
+        tr.style.display = (!q || t.indexOf(q) !== -1) ? '' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>

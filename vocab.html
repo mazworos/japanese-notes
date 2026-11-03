@@ -3,12 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vocabulary | Catatan Bahasa Jepang</title>
-  <meta name="description" content="Kosakata penting Minna no Nihongo Lesson 1–12 dan kata umum N5 untuk review.">
+  <title>Vocabulary N5 | Catatan Bahasa Jepang</title>
+  <meta name="description" content="Kosakata JLPT N5 lengkap untuk review. Selaras dengan bank soal kuis.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .vocab-cat { margin-top: 1.75rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+    .vocab-cat .badge {
+      font-size: 0.75rem; font-weight: 600; background: var(--bg-soft);
+      color: var(--text-muted); border-radius: 999px; padding: 0.15rem 0.55rem;
+      font-family: var(--font-sans);
+    }
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .vocab-table th, .vocab-table td {
+      text-align: left; padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--border);
+    }
+    .vocab-table th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; }
+    .vocab-table td:first-child { font-family: var(--font-serif); font-size: 1.05rem; color: var(--primary); white-space: nowrap; }
+    .table-wrap {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; margin-bottom: 0.5rem; box-shadow: var(--shadow);
+    }
+    .search-box {
+      width: 100%; max-width: 360px; padding: 0.6rem 0.85rem; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 1rem; margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -36,277 +58,636 @@
   <main>
     <section class="section">
       <div class="container">
-        <h1>Vocabulary</h1>
-        <p class="lead mb-2">Kosakata inti dari Minna no Nihongo (awal) + kata umum N5. Bukan daftar 1000+ kata — fokus yang sering muncul dulu. Kamu bisa koreksi/tambah sendiri.</p>
+        <h1>Vocabulary N5</h1>
+        <p class="lead mb-2">Kosakata inti JLPT N5 (±563 kata). Sama dengan bank soal di halaman Kuis — cocok untuk dibaca ulang sebelum latihan.</p>
+        <input type="search" class="search-box" id="vocab-search" placeholder="Cari kata / arti…" autocomplete="off">
 
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="l1-4">Lesson 1–4</button>
-          <button class="tab-btn" data-tab="l5-8">Lesson 5–8</button>
-          <button class="tab-btn" data-tab="l9-12">Lesson 9–12</button>
-          <button class="tab-btn" data-tab="common">Kata Umum N5</button>
-        </div>
-
-        <!-- L1-4 -->
-        <div id="l1-4" class="tab-panel active">
-          <h2>Lesson 1–4</h2>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Kata</th><th>Baca</th><th>Arti</th></tr></thead>
-              <tbody>
-                <tr><td>わたし</td><td>watashi</td><td>saya</td></tr>
-                <tr><td>あなた</td><td>anata</td><td>kamu</td></tr>
-                <tr><td>あのひと / あのかた</td><td>ano hito / ano kata</td><td>orang itu (dia)</td></tr>
-                <tr><td>みなさん</td><td>minasan</td><td>semuanya</td></tr>
-                <tr><td>せんせい</td><td>sensei</td><td>guru / sensei</td></tr>
-                <tr><td>がくせい</td><td>gakusei</td><td>mahasiswa / siswa</td></tr>
-                <tr><td>かいしゃいん</td><td>kaishain</td><td>karyawan perusahaan</td></tr>
-                <tr><td>いしゃ</td><td>isha</td><td>dokter</td></tr>
-                <tr><td>エンジニア</td><td>enjinia</td><td>engineer</td></tr>
-                <tr><td>だいがく</td><td>daigaku</td><td>universitas</td></tr>
-                <tr><td>びょういん</td><td>byouin</td><td>rumah sakit</td></tr>
-                <tr><td>だれ / どなた</td><td>dare / donata</td><td>siapa</td></tr>
-                <tr><td>はい / いいえ</td><td>hai / iie</td><td>ya / tidak</td></tr>
-                <tr><td>はじめまして</td><td>hajimemashite</td><td>perkenalan (pertama kali)</td></tr>
-                <tr><td>どうぞよろしく</td><td>douzo yoroshiku</td><td>mohon bantuannya</td></tr>
-                <tr><td>これ / それ / あれ / どれ</td><td>kore / sore / are / dore</td><td>ini / itu / itu (jauh) / yang mana</td></tr>
-                <tr><td>この / その / あの / どの</td><td>kono / sono / ano / dono</td><td>ini ~ / itu ~</td></tr>
-                <tr><td>ほん</td><td>hon</td><td>buku</td></tr>
-                <tr><td>じしょ</td><td>jisho</td><td>kamus</td></tr>
-                <tr><td>ざっし</td><td>zasshi</td><td>majalah</td></tr>
-                <tr><td>しんぶん</td><td>shinbun</td><td>koran</td></tr>
-                <tr><td>ノート</td><td>nooto</td><td>buku catatan</td></tr>
-                <tr><td>てちょう</td><td>techou</td><td>buku agenda</td></tr>
-                <tr><td>カード</td><td>kaado</td><td>kartu</td></tr>
-                <tr><td>えんぴつ</td><td>enpitsu</td><td>pensil</td></tr>
-                <tr><td>ボールペン</td><td>boorupen</td><td>ballpoint</td></tr>
-                <tr><td>かぎ</td><td>kagi</td><td>kunci</td></tr>
-                <tr><td>とけい</td><td>tokei</td><td>jam</td></tr>
-                <tr><td>かさ</td><td>kasa</td><td>payung</td></tr>
-                <tr><td>かばん</td><td>kaban</td><td>tas</td></tr>
-                <tr><td>テレビ</td><td>terebi</td><td>TV</td></tr>
-                <tr><td>ラジオ</td><td>rajio</td><td>radio</td></tr>
-                <tr><td>カメラ</td><td>kamera</td><td>kamera</td></tr>
-                <tr><td>ここ / そこ / あそこ / どこ</td><td>koko / soko / asoko / doko</td><td>di sini / situ / sana / mana</td></tr>
-                <tr><td>がっこう</td><td>gakkou</td><td>sekolah</td></tr>
-                <tr><td>うち / いえ</td><td>uchi / ie</td><td>rumah</td></tr>
-                <tr><td>でんわ</td><td>denwa</td><td>telepon</td></tr>
-                <tr><td>くつ</td><td>kutsu</td><td>sepatu</td></tr>
-                <tr><td>トイレ / おてあらい</td><td>toire / otearai</td><td>toilet</td></tr>
-                <tr><td>いくら</td><td>ikura</td><td>berapa harganya</td></tr>
-                <tr><td>～えん</td><td>~en</td><td>~ yen</td></tr>
-                <tr><td>いま</td><td>ima</td><td>sekarang</td></tr>
-                <tr><td>～じ</td><td>~ji</td><td>~ jam</td></tr>
-                <tr><td>～ふん / ぷん</td><td>~fun / pun</td><td>~ menit</td></tr>
-                <tr><td>はん</td><td>han</td><td>setengah</td></tr>
-                <tr><td>なに / なん</td><td>nani / nan</td><td>apa</td></tr>
-                <tr><td>起きます</td><td>okimasu</td><td>bangun</td></tr>
-                <tr><td>寝ます</td><td>nemasu</td><td>tidur</td></tr>
-                <tr><td>働きます</td><td>hatarakimasu</td><td>bekerja</td></tr>
-                <tr><td>休みます</td><td>yasumimasu</td><td>istirahat / libur</td></tr>
-                <tr><td>勉強します</td><td>benkyou shimasu</td><td>belajar</td></tr>
-                <tr><td>終わります</td><td>owarimasu</td><td>selesai</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- L5-8 -->
-        <div id="l5-8" class="tab-panel">
-          <h2>Lesson 5–8</h2>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Kata</th><th>Baca</th><th>Arti</th></tr></thead>
-              <tbody>
-                <tr><td>行きます</td><td>ikimasu</td><td>pergi</td></tr>
-                <tr><td>来ます</td><td>kimasu</td><td>datang</td></tr>
-                <tr><td>帰ります</td><td>kaerimasu</td><td>pulang</td></tr>
-                <tr><td>学校</td><td>gakkou</td><td>sekolah</td></tr>
-                <tr><td>スーパー</td><td>suupaa</td><td>supermarket</td></tr>
-                <tr><td>駅</td><td>eki</td><td>stasiun</td></tr>
-                <tr><td>飛行機</td><td>hikouki</td><td>pesawat</td></tr>
-                <tr><td>船</td><td>fune</td><td>kapal</td></tr>
-                <tr><td>電車</td><td>densha</td><td>kereta listrik</td></tr>
-                <tr><td>バス</td><td>basu</td><td>bus</td></tr>
-                <tr><td>タクシー</td><td>takushii</td><td>taksi</td></tr>
-                <tr><td>自転車</td><td>jitensha</td><td>sepeda</td></tr>
-                <tr><td>歩いて</td><td>aruite</td><td>dengan berjalan kaki</td></tr>
-                <tr><td>人</td><td>hito</td><td>orang</td></tr>
-                <tr><td>友達</td><td>tomodachi</td><td>teman</td></tr>
-                <tr><td>彼</td><td>kare</td><td>dia (laki-laki)</td></tr>
-                <tr><td>彼女</td><td>kanojo</td><td>dia (perempuan) / pacar</td></tr>
-                <tr><td>家族</td><td>kazoku</td><td>keluarga</td></tr>
-                <tr><td>一人で</td><td>hitori de</td><td>sendirian</td></tr>
-                <tr><td>先週</td><td>senshuu</td><td>minggu lalu</td></tr>
-                <tr><td>今週</td><td>konshuu</td><td>minggu ini</td></tr>
-                <tr><td>来週</td><td>raishuu</td><td>minggu depan</td></tr>
-                <tr><td>先月</td><td>sengetsu</td><td>bulan lalu</td></tr>
-                <tr><td>今月</td><td>kongetsu</td><td>bulan ini</td></tr>
-                <tr><td>来月</td><td>raigetsu</td><td>bulan depan</td></tr>
-                <tr><td>去年</td><td>kyonen</td><td>tahun lalu</td></tr>
-                <tr><td>今年</td><td>kotoshi</td><td>tahun ini</td></tr>
-                <tr><td>来年</td><td>rainen</td><td>tahun depan</td></tr>
-                <tr><td>食べます</td><td>tabemasu</td><td>makan</td></tr>
-                <tr><td>飲みます</td><td>nomimasu</td><td>minum</td></tr>
-                <tr><td>吸います</td><td>suimasu</td><td>menghisap (rokok)</td></tr>
-                <tr><td>見ます</td><td>mimasu</td><td>melihat / menonton</td></tr>
-                <tr><td>聞きます</td><td>kikimasu</td><td>mendengar / bertanya</td></tr>
-                <tr><td>読みます</td><td>yomimasu</td><td>membaca</td></tr>
-                <tr><td>書きます</td><td>kakimasu</td><td>menulis</td></tr>
-                <tr><td>買います</td><td>kaimasu</td><td>membeli</td></tr>
-                <tr><td>撮ります</td><td>torimasu</td><td>memotret</td></tr>
-                <tr><td>します</td><td>shimasu</td><td>melakukan</td></tr>
-                <tr><td>会います</td><td>aimasu</td><td>bertemu</td></tr>
-                <tr><td>ご飯</td><td>gohan</td><td>nasi / makanan</td></tr>
-                <tr><td>朝ごはん</td><td>asagohan</td><td>sarapan</td></tr>
-                <tr><td>昼ごはん</td><td>hirugohan</td><td>makan siang</td></tr>
-                <tr><td>晩ごはん</td><td>bangohan</td><td>makan malam</td></tr>
-                <tr><td>パン</td><td>pan</td><td>roti</td></tr>
-                <tr><td>卵</td><td>tamago</td><td>telur</td></tr>
-                <tr><td>肉</td><td>niku</td><td>daging</td></tr>
-                <tr><td>魚</td><td>sakana</td><td>ikan</td></tr>
-                <tr><td>野菜</td><td>yasai</td><td>sayuran</td></tr>
-                <tr><td>果物</td><td>kudamono</td><td>buah</td></tr>
-                <tr><td>水</td><td>mizu</td><td>air</td></tr>
-                <tr><td>お茶</td><td>ocha</td><td>teh</td></tr>
-                <tr><td>紅茶</td><td>koucha</td><td>teh hitam</td></tr>
-                <tr><td>牛乳</td><td>gyuunyuu</td><td>susu sapi</td></tr>
-                <tr><td>ジュース</td><td>juusu</td><td>jus</td></tr>
-                <tr><td>ビール</td><td>biiru</td><td>bir</td></tr>
-                <tr><td>お酒</td><td>osake</td><td>sake / alkohol</td></tr>
-                <tr><td>ビデオ</td><td>bideo</td><td>video</td></tr>
-                <tr><td>映画</td><td>eiga</td><td>film</td></tr>
-                <tr><td>手紙</td><td>tegami</td><td>surat</td></tr>
-                <tr><td>レポート</td><td>repooto</td><td>laporan</td></tr>
-                <tr><td>写真</td><td>shashin</td><td>foto</td></tr>
-                <tr><td>店</td><td>mise</td><td>toko</td></tr>
-                <tr><td>レストラン</td><td>resutoran</td><td>restoran</td></tr>
-                <tr><td>庭</td><td>niwa</td><td>taman</td></tr>
-                <tr><td>宿題</td><td>shukudai</td><td>PR</td></tr>
-                <tr><td>テニス</td><td>tenisu</td><td>tenis</td></tr>
-                <tr><td>サッカー</td><td>sakkaa</td><td>sepak bola</td></tr>
-                <tr><td>お花見</td><td>ohanami</td><td>melihat bunga sakura</td></tr>
-                <tr><td>何</td><td>nani</td><td>apa</td></tr>
-                <tr><td>一緒に</td><td>issho ni</td><td>bersama-sama</td></tr>
-                <tr><td>ちょっと</td><td>chotto</td><td>sedikit / sebentar</td></tr>
-                <tr><td>いつも</td><td>itsumo</td><td>selalu</td></tr>
-                <tr><td>時々</td><td>tokidoki</td><td>kadang-kadang</td></tr>
-                <tr><td>それから</td><td>sorekara</td><td>setelah itu / lalu</td></tr>
-                <tr><td>はい</td><td>hai</td><td>ya (menerima undangan)</td></tr>
-                <tr><td>いいです</td><td>ii desu</td><td>tidak usah / sudah cukup</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- L9-12 -->
-        <div id="l9-12" class="tab-panel">
-          <h2>Lesson 9–12 (ringkas)</h2>
-          <p class="muted mb-1">Fokus preferensi, belanja, hitungan, pengalaman.</p>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Kata</th><th>Baca</th><th>Arti</th></tr></thead>
-              <tbody>
-                <tr><td>好き</td><td>suki</td><td>suka</td></tr>
-                <tr><td>嫌い</td><td>kirai</td><td>tidak suka</td></tr>
-                <tr><td>上手</td><td>jouzu</td><td>pandai</td></tr>
-                <tr><td>下手</td><td>heta</td><td>tidak pandai</td></tr>
-                <tr><td>料理</td><td>ryouri</td><td>masakan</td></tr>
-                <tr><td>飲み物</td><td>nomimono</td><td>minuman</td></tr>
-                <tr><td>スポーツ</td><td>supootsu</td><td>olahraga</td></tr>
-                <tr><td>音楽</td><td>ongaku</td><td>musik</td></tr>
-                <tr><td>歌</td><td>uta</td><td>lagu</td></tr>
-                <tr><td>ダンス</td><td>dansu</td><td>dance</td></tr>
-                <tr><td>絵</td><td>e</td><td>gambar</td></tr>
-                <tr><td>字</td><td>ji</td><td>huruf / tulisan</td></tr>
-                <tr><td>あります</td><td>arimasu</td><td>ada (benda)</td></tr>
-                <tr><td>います</td><td>imasu</td><td>ada (makhluk hidup)</td></tr>
-                <tr><td>りんご</td><td>ringo</td><td>apel</td></tr>
-                <tr><td>みかん</td><td>mikan</td><td>jeruk</td></tr>
-                <tr><td>サンドイッチ</td><td>sandoicchi</td><td>sandwich</td></tr>
-                <tr><td>カレー</td><td>karee</td><td>kari</td></tr>
-                <tr><td>アイスクリーム</td><td>aisukuriimu</td><td>es krim</td></tr>
-                <tr><td>切手</td><td>kitte</td><td>perangko</td></tr>
-                <tr><td>はがき</td><td>hagaki</td><td>kartu pos</td></tr>
-                <tr><td>封筒</td><td>fuutou</td><td>amplop</td></tr>
-                <tr><td>荷物</td><td>nimotsu</td><td>barang bawaan</td></tr>
-                <tr><td>お金</td><td>okane</td><td>uang</td></tr>
-                <tr><td>切符</td><td>kippu</td><td>tiket</td></tr>
-                <tr><td>隣</td><td>tonari</td><td>sebelah</td></tr>
-                <tr><td>下</td><td>shita</td><td>bawah</td></tr>
-                <tr><td>上</td><td>ue</td><td>atas</td></tr>
-                <tr><td>前</td><td>mae</td><td>depan</td></tr>
-                <tr><td>後ろ</td><td>ushiro</td><td>belakang</td></tr>
-                <tr><td>中</td><td>naka</td><td>dalam</td></tr>
-                <tr><td>外</td><td>soto</td><td>luar</td></tr>
-                <tr><td>右</td><td>migi</td><td>kanan</td></tr>
-                <tr><td>左</td><td>hidari</td><td>kiri</td></tr>
-                <tr><td>近く</td><td>chikaku</td><td>dekat</td></tr>
-                <tr><td>間</td><td>aida</td><td>antara</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- COMMON -->
-        <div id="common" class="tab-panel">
-          <h2>Kata umum N5 (tambahan)</h2>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Kata</th><th>Baca</th><th>Arti</th></tr></thead>
-              <tbody>
-                <tr><td>今日</td><td>kyou</td><td>hari ini</td></tr>
-                <tr><td>明日</td><td>ashita</td><td>besok</td></tr>
-                <tr><td>昨日</td><td>kinou</td><td>kemarin</td></tr>
-                <tr><td>朝</td><td>asa</td><td>pagi</td></tr>
-                <tr><td>昼</td><td>hiru</td><td>siang</td></tr>
-                <tr><td>晩 / 夜</td><td>ban / yoru</td><td>malam</td></tr>
-                <tr><td>毎日</td><td>mainichi</td><td>setiap hari</td></tr>
-                <tr><td>毎週</td><td>maishuu</td><td>setiap minggu</td></tr>
-                <tr><td>毎月</td><td>maitsuki</td><td>setiap bulan</td></tr>
-                <tr><td>毎年</td><td>maitoshi / maitoshi</td><td>setiap tahun</td></tr>
-                <tr><td>月曜日</td><td>getsuyoubi</td><td>Senin</td></tr>
-                <tr><td>火曜日</td><td>kayoubi</td><td>Selasa</td></tr>
-                <tr><td>水曜日</td><td>suiyoubi</td><td>Rabu</td></tr>
-                <tr><td>木曜日</td><td>mokuyoubi</td><td>Kamis</td></tr>
-                <tr><td>金曜日</td><td>kinyoubi</td><td>Jumat</td></tr>
-                <tr><td>土曜日</td><td>doyoubi</td><td>Sabtu</td></tr>
-                <tr><td>日曜日</td><td>nichiyoubi</td><td>Minggu</td></tr>
-                <tr><td>天気</td><td>tenki</td><td>cuaca</td></tr>
-                <tr><td>雨</td><td>ame</td><td>hujan</td></tr>
-                <tr><td>晴れ</td><td>hare</td><td>cerah</td></tr>
-                <tr><td>曇り</td><td>kumori</td><td>berawan</td></tr>
-                <tr><td>雪</td><td>yuki</td><td>salju</td></tr>
-                <tr><td>熱い / 暑い</td><td>atsui</td><td>panas (benda / cuaca)</td></tr>
-                <tr><td>寒い</td><td>samui</td><td>dingin (cuaca)</td></tr>
-                <tr><td>大きい</td><td>ookii</td><td>besar</td></tr>
-                <tr><td>小さい</td><td>chiisai</td><td>kecil</td></tr>
-                <tr><td>新しい</td><td>atarashii</td><td>baru</td></tr>
-                <tr><td>古い</td><td>furui</td><td>lama / tua</td></tr>
-                <tr><td>いい / 良い</td><td>ii / yoi</td><td>baik</td></tr>
-                <tr><td>悪い</td><td>warui</td><td>buruk</td></tr>
-                <tr><td>高い</td><td>takai</td><td>tinggi / mahal</td></tr>
-                <tr><td>安い</td><td>yasui</td><td>murah</td></tr>
-                <tr><td>難しい</td><td>muzukashii</td><td>sulit</td></tr>
-                <tr><td>易しい</td><td>yasashii</td><td>mudah</td></tr>
-                <tr><td>面白い</td><td>omoshiroi</td><td>menarik / lucu</td></tr>
-                <tr><td>楽しい</td><td>tanoshii</td><td>menyenangkan</td></tr>
-                <tr><td>忙しい</td><td>isogashii</td><td>sibuk</td></tr>
-                <tr><td>暇</td><td>hima</td><td>luang</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+          <h3 class="vocab-cat">Orang & kata ganti <span class="badge">27</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あなた</td><td>kamu</td></tr>
+            <tr><td>いしゃ</td><td>dokter</td></tr>
+            <tr><td>おきゃくさん</td><td>tamu / pelanggan</td></tr>
+            <tr><td>おれ</td><td>saya (kasual laki)</td></tr>
+            <tr><td>かいしゃいん</td><td>karyawan</td></tr>
+            <tr><td>かかりのひと</td><td>petugas</td></tr>
+            <tr><td>かた</td><td>orang (sopan)</td></tr>
+            <tr><td>かれ</td><td>dia (laki-laki)</td></tr>
+            <tr><td>かんごし</td><td>perawat</td></tr>
+            <tr><td>がくせい</td><td>siswa / mahasiswa</td></tr>
+            <tr><td>しゃちょう</td><td>presiden direktur</td></tr>
+            <tr><td>しゅふ</td><td>ibu rumah tangga</td></tr>
+            <tr><td>じぶん</td><td>diri sendiri</td></tr>
+            <tr><td>せんせい</td><td>guru</td></tr>
+            <tr><td>だれ</td><td>siapa</td></tr>
+            <tr><td>となりのひと</td><td>orang di sebelah</td></tr>
+            <tr><td>ともだち</td><td>teman</td></tr>
+            <tr><td>にほんじん</td><td>orang Jepang</td></tr>
+            <tr><td>ひと</td><td>orang</td></tr>
+            <tr><td>ぶちょう</td><td>kepala bagian</td></tr>
+            <tr><td>べんごし</td><td>pengacara</td></tr>
+            <tr><td>ぼく</td><td>saya (laki-laki)</td></tr>
+            <tr><td>みなさん</td><td>semuanya</td></tr>
+            <tr><td>みんなの</td><td>milik semua</td></tr>
+            <tr><td>わたし</td><td>saya</td></tr>
+            <tr><td>アメリカじん</td><td>orang Amerika</td></tr>
+            <tr><td>エンジニア</td><td>insinyur</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Keluarga <span class="badge">15</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あに</td><td>kakak laki-laki</td></tr>
+            <tr><td>あね</td><td>kakak perempuan</td></tr>
+            <tr><td>いもうと</td><td>adik perempuan</td></tr>
+            <tr><td>おかあさん</td><td>ibu</td></tr>
+            <tr><td>おとうさん</td><td>ayah</td></tr>
+            <tr><td>おとうと</td><td>adik laki-laki</td></tr>
+            <tr><td>おとこのこ</td><td>anak laki-laki</td></tr>
+            <tr><td>おんなのこ</td><td>anak perempuan</td></tr>
+            <tr><td>かぞく</td><td>keluarga</td></tr>
+            <tr><td>かのじょ</td><td>dia (perempuan)</td></tr>
+            <tr><td>かれし</td><td>pacar (laki)</td></tr>
+            <tr><td>ちち</td><td>ayah (milik sendiri)</td></tr>
+            <tr><td>はは</td><td>ibu (milik sendiri)</td></tr>
+            <tr><td>りょうしん</td><td>orang tua</td></tr>
+            <tr><td>子ども</td><td>anak</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Tempat <span class="badge">57</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あんないじょ</td><td>pusat informasi</td></tr>
+            <tr><td>いえ</td><td>rumah</td></tr>
+            <tr><td>いけ</td><td>danau</td></tr>
+            <tr><td>いま</td><td>sekarang</td></tr>
+            <tr><td>うち</td><td>rumah</td></tr>
+            <tr><td>うみ</td><td>laut</td></tr>
+            <tr><td>えいがかん</td><td>bioskop</td></tr>
+            <tr><td>えき</td><td>stasiun</td></tr>
+            <tr><td>おてあらい</td><td>toilet</td></tr>
+            <tr><td>かいしゃ</td><td>perusahaan</td></tr>
+            <tr><td>かど</td><td>pojok</td></tr>
+            <tr><td>がっこう</td><td>sekolah</td></tr>
+            <tr><td>きっさてん</td><td>kafe</td></tr>
+            <tr><td>きょうかい</td><td>gereja</td></tr>
+            <tr><td>ぎんこう</td><td>bank</td></tr>
+            <tr><td>くうこう</td><td>bandara</td></tr>
+            <tr><td>くに</td><td>negara</td></tr>
+            <tr><td>こうえん</td><td>taman</td></tr>
+            <tr><td>こうこう</td><td>SMA</td></tr>
+            <tr><td>こうさてん</td><td>persimpangan</td></tr>
+            <tr><td>しょうがっこう</td><td>SD</td></tr>
+            <tr><td>しんごう</td><td>lampu lalu lintas</td></tr>
+            <tr><td>じんじゃ</td><td>kuil Shinto</td></tr>
+            <tr><td>たいいくかん</td><td>gedung olahraga</td></tr>
+            <tr><td>だいがく</td><td>universitas</td></tr>
+            <tr><td>だいどころ</td><td>dapur</td></tr>
+            <tr><td>ちず</td><td>peta</td></tr>
+            <tr><td>ちゅうがっこう</td><td>SMP</td></tr>
+            <tr><td>てら</td><td>kuil Buddha</td></tr>
+            <tr><td>とうきょう</td><td>Tokyo</td></tr>
+            <tr><td>としょかん</td><td>perpustakaan</td></tr>
+            <tr><td>にほん</td><td>Jepang</td></tr>
+            <tr><td>にわ</td><td>halaman</td></tr>
+            <tr><td>はし</td><td>jembatan / sumpit</td></tr>
+            <tr><td>はなや</td><td>toko bunga</td></tr>
+            <tr><td>ばしょ</td><td>tempat</td></tr>
+            <tr><td>びじゅつかん</td><td>museum</td></tr>
+            <tr><td>びょういん</td><td>rumah sakit</td></tr>
+            <tr><td>ふろ</td><td>kamar mandi</td></tr>
+            <tr><td>へや</td><td>kamar</td></tr>
+            <tr><td>ほいくえん</td><td>daycare</td></tr>
+            <tr><td>ほんや</td><td>toko buku</td></tr>
+            <tr><td>まち</td><td>kota</td></tr>
+            <tr><td>みせ</td><td>toko</td></tr>
+            <tr><td>みち</td><td>jalan</td></tr>
+            <tr><td>ゆうびんきょく</td><td>kantor pos</td></tr>
+            <tr><td>ようちえん</td><td>TK</td></tr>
+            <tr><td>りょう</td><td>asrama</td></tr>
+            <tr><td>アパート</td><td>apartemen</td></tr>
+            <tr><td>コンビニ</td><td>minimarket</td></tr>
+            <tr><td>スーパー</td><td>supermarket</td></tr>
+            <tr><td>デパート</td><td>department store</td></tr>
+            <tr><td>トイレ</td><td>toilet</td></tr>
+            <tr><td>プール</td><td>kolam renang</td></tr>
+            <tr><td>ホテル</td><td>hotel</td></tr>
+            <tr><td>マンション</td><td>apartemen mewah</td></tr>
+            <tr><td>レストラン</td><td>restoran</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Waktu & hari <span class="badge">48</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あさ</td><td>pagi</td></tr>
+            <tr><td>あした</td><td>besok</td></tr>
+            <tr><td>いちがつ</td><td>Januari</td></tr>
+            <tr><td>かようび</td><td>Selasa</td></tr>
+            <tr><td>きのう</td><td>kemarin</td></tr>
+            <tr><td>きょう</td><td>hari ini</td></tr>
+            <tr><td>きょねん</td><td>tahun lalu</td></tr>
+            <tr><td>きんようび</td><td>Jumat</td></tr>
+            <tr><td>くがつ</td><td>September</td></tr>
+            <tr><td>げつようび</td><td>Senin</td></tr>
+            <tr><td>ことし</td><td>tahun ini</td></tr>
+            <tr><td>こんげつ</td><td>bulan ini</td></tr>
+            <tr><td>こんしゅう</td><td>minggu ini</td></tr>
+            <tr><td>ごがつ</td><td>Mei</td></tr>
+            <tr><td>さい</td><td>tahun (umur)</td></tr>
+            <tr><td>さんがつ</td><td>Maret</td></tr>
+            <tr><td>しがつ</td><td>April</td></tr>
+            <tr><td>しちがつ</td><td>Juli</td></tr>
+            <tr><td>しゅうまつ</td><td>akhir pekan</td></tr>
+            <tr><td>じかん</td><td>waktu / jam</td></tr>
+            <tr><td>じゅういちがつ</td><td>November</td></tr>
+            <tr><td>じゅうがつ</td><td>Oktober</td></tr>
+            <tr><td>じゅうにがつ</td><td>Desember</td></tr>
+            <tr><td>すいようび</td><td>Rabu</td></tr>
+            <tr><td>せんげつ</td><td>bulan lalu</td></tr>
+            <tr><td>せんしゅう</td><td>minggu lalu</td></tr>
+            <tr><td>たんじょうび</td><td>ulang tahun</td></tr>
+            <tr><td>どようび</td><td>Sabtu</td></tr>
+            <tr><td>にがつ</td><td>Februari</td></tr>
+            <tr><td>にちようび</td><td>Minggu</td></tr>
+            <tr><td>はちがつ</td><td>Agustus</td></tr>
+            <tr><td>ばん</td><td>malam</td></tr>
+            <tr><td>ひる</td><td>siang</td></tr>
+            <tr><td>ひるやすみ</td><td>istirahat siang</td></tr>
+            <tr><td>びょう</td><td>detik</td></tr>
+            <tr><td>ふん</td><td>menit</td></tr>
+            <tr><td>まいあさ</td><td>setiap pagi</td></tr>
+            <tr><td>まいしゅう</td><td>setiap minggu</td></tr>
+            <tr><td>まいとし</td><td>setiap tahun</td></tr>
+            <tr><td>まいにち</td><td>setiap hari</td></tr>
+            <tr><td>まいばん</td><td>setiap malam</td></tr>
+            <tr><td>もくようび</td><td>Kamis</td></tr>
+            <tr><td>やすみ</td><td>libur</td></tr>
+            <tr><td>よる</td><td>malam</td></tr>
+            <tr><td>らいげつ</td><td>bulan depan</td></tr>
+            <tr><td>らいしゅう</td><td>minggu depan</td></tr>
+            <tr><td>らいねん</td><td>tahun depan</td></tr>
+            <tr><td>ろくがつ</td><td>Juni</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Angka & jumlah <span class="badge">40</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>いくつ</td><td>berapa (benda)</td></tr>
+            <tr><td>いくら</td><td>berapa harga</td></tr>
+            <tr><td>いち</td><td>satu</td></tr>
+            <tr><td>いつつ</td><td>lima buah</td></tr>
+            <tr><td>きゅう</td><td>sembilan</td></tr>
+            <tr><td>ぐらい</td><td>kira-kira</td></tr>
+            <tr><td>ここのつ</td><td>sembilan buah</td></tr>
+            <tr><td>ご</td><td>lima</td></tr>
+            <tr><td>さん</td><td>tiga</td></tr>
+            <tr><td>じゅう</td><td>sepuluh</td></tr>
+            <tr><td>せん</td><td>seribu</td></tr>
+            <tr><td>ぜんぶ</td><td>semua</td></tr>
+            <tr><td>だいたい</td><td>kira-kira</td></tr>
+            <tr><td>ちょうど</td><td>tepat</td></tr>
+            <tr><td>とお</td><td>sepuluh buah</td></tr>
+            <tr><td>なな</td><td>tujuh</td></tr>
+            <tr><td>ななつ</td><td>tujuh buah</td></tr>
+            <tr><td>なんじ</td><td>jam berapa</td></tr>
+            <tr><td>なんにん</td><td>berapa orang</td></tr>
+            <tr><td>に</td><td>dua</td></tr>
+            <tr><td>はち</td><td>delapan</td></tr>
+            <tr><td>はん</td><td>setengah</td></tr>
+            <tr><td>ひとつ</td><td>satu buah</td></tr>
+            <tr><td>ひとり</td><td>satu orang</td></tr>
+            <tr><td>ひゃく</td><td>seratus</td></tr>
+            <tr><td>ふたつ</td><td>dua buah</td></tr>
+            <tr><td>ふたり</td><td>dua orang</td></tr>
+            <tr><td>ほとんど</td><td>hampir semua</td></tr>
+            <tr><td>まん</td><td>sepuluh ribu</td></tr>
+            <tr><td>みっつ</td><td>tiga buah</td></tr>
+            <tr><td>むっつ</td><td>enam buah</td></tr>
+            <tr><td>やく</td><td>sekitar</td></tr>
+            <tr><td>やっつ</td><td>delapan buah</td></tr>
+            <tr><td>よっつ</td><td>empat buah</td></tr>
+            <tr><td>よん</td><td>empat</td></tr>
+            <tr><td>ろく</td><td>enam</td></tr>
+            <tr><td>キロ</td><td>kilo</td></tr>
+            <tr><td>グラム</td><td>gram</td></tr>
+            <tr><td>ページ</td><td>halaman</td></tr>
+            <tr><td>メートル</td><td>meter</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Benda & alat <span class="badge">29</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>いす</td><td>kursi</td></tr>
+            <tr><td>かさ</td><td>payung</td></tr>
+            <tr><td>かばん</td><td>tas</td></tr>
+            <tr><td>かみ</td><td>kertas</td></tr>
+            <tr><td>くつ</td><td>sepatu</td></tr>
+            <tr><td>くつした</td><td>kaus kaki</td></tr>
+            <tr><td>さいふ</td><td>dompet</td></tr>
+            <tr><td>せんたくき</td><td>mesin cuci</td></tr>
+            <tr><td>つくえ</td><td>meja</td></tr>
+            <tr><td>でんわ</td><td>telepon</td></tr>
+            <tr><td>ふく</td><td>pakaian</td></tr>
+            <tr><td>ほん</td><td>buku</td></tr>
+            <tr><td>ほんとう</td><td>benar / sungguh</td></tr>
+            <tr><td>まど</td><td>jendela</td></tr>
+            <tr><td>めがね</td><td>kacamata</td></tr>
+            <tr><td>れいぞうこ</td><td>kulkas</td></tr>
+            <tr><td>エアコン</td><td>AC</td></tr>
+            <tr><td>カメラ</td><td>kamera</td></tr>
+            <tr><td>カーテン</td><td>tirai</td></tr>
+            <tr><td>シャープペンシル</td><td>mechanical pencil</td></tr>
+            <tr><td>スマホ</td><td>smartphone</td></tr>
+            <tr><td>テレビ</td><td>TV</td></tr>
+            <tr><td>テーブル</td><td>meja makan</td></tr>
+            <tr><td>ドア</td><td>pintu</td></tr>
+            <tr><td>ノート</td><td>buku catatan</td></tr>
+            <tr><td>パソコン</td><td>PC</td></tr>
+            <tr><td>ベッド</td><td>tempat tidur</td></tr>
+            <tr><td>ペン</td><td>pena</td></tr>
+            <tr><td>ボールペン</td><td>bolpoin</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Makanan & minuman <span class="badge">24</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あさごはん</td><td>sarapan</td></tr>
+            <tr><td>あぶら</td><td>minyak</td></tr>
+            <tr><td>おさけ</td><td>minuman beralkohol</td></tr>
+            <tr><td>おちゃ</td><td>teh</td></tr>
+            <tr><td>ぎゅうにゅう</td><td>susu</td></tr>
+            <tr><td>くだもの</td><td>buah</td></tr>
+            <tr><td>ごはん</td><td>nasi / makanan</td></tr>
+            <tr><td>さかな</td><td>ikan</td></tr>
+            <tr><td>さとう</td><td>gula</td></tr>
+            <tr><td>しお</td><td>garam</td></tr>
+            <tr><td>しょくじします</td><td>makan (santap)</td></tr>
+            <tr><td>たまご</td><td>telur</td></tr>
+            <tr><td>にく</td><td>daging</td></tr>
+            <tr><td>ばんごはん</td><td>makan malam</td></tr>
+            <tr><td>ひるごはん</td><td>makan siang</td></tr>
+            <tr><td>みかん</td><td>jeruk</td></tr>
+            <tr><td>みず</td><td>air</td></tr>
+            <tr><td>やさい</td><td>sayur</td></tr>
+            <tr><td>りんご</td><td>apel</td></tr>
+            <tr><td>コーヒー</td><td>kopi</td></tr>
+            <tr><td>ジュース</td><td>jus</td></tr>
+            <tr><td>バナナ</td><td>pisang</td></tr>
+            <tr><td>パン</td><td>roti</td></tr>
+            <tr><td>ビール</td><td>bir</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Transportasi <span class="badge">18</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>うんてん</td><td>mengemudi</td></tr>
+            <tr><td>うんてんしゅ</td><td>sopir</td></tr>
+            <tr><td>おります</td><td>turun (kendaraan)</td></tr>
+            <tr><td>きっぷ</td><td>tiket</td></tr>
+            <tr><td>くるま</td><td>mobil</td></tr>
+            <tr><td>しゃりん</td><td>roda</td></tr>
+            <tr><td>しゅっぱつ</td><td>berangkat</td></tr>
+            <tr><td>じてんしゃ</td><td>sepeda</td></tr>
+            <tr><td>じょうしゃ</td><td>naik kendaraan</td></tr>
+            <tr><td>ちかてつ</td><td>subway</td></tr>
+            <tr><td>でんしゃ</td><td>kereta</td></tr>
+            <tr><td>とうちゃく</td><td>tiba</td></tr>
+            <tr><td>のります</td><td>naik (kendaraan)</td></tr>
+            <tr><td>ひこうき</td><td>pesawat</td></tr>
+            <tr><td>ふね</td><td>kapal</td></tr>
+            <tr><td>ガソリン</td><td>bensin</td></tr>
+            <tr><td>タクシー</td><td>taksi</td></tr>
+            <tr><td>バス</td><td>bus</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Kata kerja <span class="badge">81</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あけます</td><td>membuka</td></tr>
+            <tr><td>あげます</td><td>memberi</td></tr>
+            <tr><td>あそびます</td><td>bermain</td></tr>
+            <tr><td>あらいます</td><td>mencuci</td></tr>
+            <tr><td>あります</td><td>ada (benda)</td></tr>
+            <tr><td>あるきます</td><td>berjalan kaki</td></tr>
+            <tr><td>いいます</td><td>berkata</td></tr>
+            <tr><td>いきます</td><td>pergi</td></tr>
+            <tr><td>います</td><td>ada (makhluk hidup)</td></tr>
+            <tr><td>いれます</td><td>memasukkan</td></tr>
+            <tr><td>うたいます</td><td>menyanyi</td></tr>
+            <tr><td>うります</td><td>menjual</td></tr>
+            <tr><td>うんどうします</td><td>berolahraga</td></tr>
+            <tr><td>おきます</td><td>bangun</td></tr>
+            <tr><td>おしえます</td><td>mengajar / memberitahu</td></tr>
+            <tr><td>おどります</td><td>menari</td></tr>
+            <tr><td>おもいます</td><td>berpikir / berpendapat</td></tr>
+            <tr><td>おわります</td><td>selesai</td></tr>
+            <tr><td>かいます</td><td>membeli</td></tr>
+            <tr><td>かえります</td><td>pulang</td></tr>
+            <tr><td>かきます</td><td>menulis</td></tr>
+            <tr><td>かします</td><td>meminjamkan</td></tr>
+            <tr><td>かります</td><td>meminjam</td></tr>
+            <tr><td>かんがえます</td><td>berpikir</td></tr>
+            <tr><td>ききます</td><td>mendengar / bertanya</td></tr>
+            <tr><td>きます</td><td>datang</td></tr>
+            <tr><td>きめます</td><td>memutuskan</td></tr>
+            <tr><td>きります</td><td>memotong</td></tr>
+            <tr><td>けっこんします</td><td>menikah</td></tr>
+            <tr><td>さんぽします</td><td>jalan-jalan</td></tr>
+            <tr><td>します</td><td>melakukan</td></tr>
+            <tr><td>しまります</td><td>tutup (toko)</td></tr>
+            <tr><td>しめます</td><td>menutup</td></tr>
+            <tr><td>しらべます</td><td>mencari / meneliti</td></tr>
+            <tr><td>しります</td><td>mengetahui</td></tr>
+            <tr><td>すいます</td><td>merokok / menghirup</td></tr>
+            <tr><td>せんたくします</td><td>mencuci baju</td></tr>
+            <tr><td>そうじします</td><td>membersihkan</td></tr>
+            <tr><td>そつぎょうします</td><td>lulus</td></tr>
+            <tr><td>たのみます</td><td>meminta</td></tr>
+            <tr><td>たべます</td><td>makan</td></tr>
+            <tr><td>だします</td><td>mengeluarkan</td></tr>
+            <tr><td>ちがいます</td><td>berbeda</td></tr>
+            <tr><td>つかいます</td><td>menggunakan</td></tr>
+            <tr><td>つきます</td><td>tiba</td></tr>
+            <tr><td>つくります</td><td>membuat</td></tr>
+            <tr><td>つたえます</td><td>menyampaikan</td></tr>
+            <tr><td>つづけます</td><td>melanjutkan</td></tr>
+            <tr><td>つとめます</td><td>bekerja di</td></tr>
+            <tr><td>てつだいます</td><td>membantu</td></tr>
+            <tr><td>でかけます</td><td>keluar (pergi)</td></tr>
+            <tr><td>とめます</td><td>berhenti / menghentikan</td></tr>
+            <tr><td>とります</td><td>mengambil / memotret</td></tr>
+            <tr><td>ならいます</td><td>belajar (dari orang)</td></tr>
+            <tr><td>なります</td><td>menjadi</td></tr>
+            <tr><td>ねます</td><td>tidur</td></tr>
+            <tr><td>のみます</td><td>minum</td></tr>
+            <tr><td>はしります</td><td>berlari</td></tr>
+            <tr><td>はじめます</td><td>mulai</td></tr>
+            <tr><td>はたらきます</td><td>bekerja</td></tr>
+            <tr><td>はなします</td><td>berbicara</td></tr>
+            <tr><td>はらいます</td><td>membayar</td></tr>
+            <tr><td>ひらきます</td><td>buka (toko)</td></tr>
+            <tr><td>ふきます</td><td>mengelap</td></tr>
+            <tr><td>べんきょうします</td><td>belajar</td></tr>
+            <tr><td>まちます</td><td>menunggu</td></tr>
+            <tr><td>みがきます</td><td>menggosok (gigi)</td></tr>
+            <tr><td>みます</td><td>melihat / menonton</td></tr>
+            <tr><td>もどります</td><td>kembali</td></tr>
+            <tr><td>もらいます</td><td>menerima</td></tr>
+            <tr><td>やすみます</td><td>istirahat</td></tr>
+            <tr><td>やといます</td><td>mempekerjakan</td></tr>
+            <tr><td>やめます</td><td>berhenti</td></tr>
+            <tr><td>よみます</td><td>membaca</td></tr>
+            <tr><td>りょうりします</td><td>memasak</td></tr>
+            <tr><td>りょこうします</td><td>bepergian</td></tr>
+            <tr><td>れんしゅうします</td><td>berlatih</td></tr>
+            <tr><td>わかります</td><td>mengerti</td></tr>
+            <tr><td>シャワーをあびます</td><td>mandi (shower)</td></tr>
+            <tr><td>呼びます</td><td>memanggil</td></tr>
+            <tr><td>見せます</td><td>memperlihatkan</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Kata sifat <span class="badge">56</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あたたかい</td><td>hangat</td></tr>
+            <tr><td>あたらしい</td><td>baru</td></tr>
+            <tr><td>あつい</td><td>panas (cuaca/benda)</td></tr>
+            <tr><td>あんしん</td><td>tenang / lega</td></tr>
+            <tr><td>いい</td><td>bagus</td></tr>
+            <tr><td>うれしい</td><td>senang</td></tr>
+            <tr><td>おいしい</td><td>enak</td></tr>
+            <tr><td>おおきい</td><td>besar</td></tr>
+            <tr><td>おもしろい</td><td>menarik</td></tr>
+            <tr><td>かっこいい</td><td>keren</td></tr>
+            <tr><td>かなしい</td><td>sedih</td></tr>
+            <tr><td>かわいい</td><td>imut</td></tr>
+            <tr><td>きらい</td><td>tidak suka</td></tr>
+            <tr><td>きれい</td><td>cantik / bersih</td></tr>
+            <tr><td>けいたい</td><td>HP</td></tr>
+            <tr><td>げんき</td><td>sehat / semangat</td></tr>
+            <tr><td>さむい</td><td>dingin (cuaca)</td></tr>
+            <tr><td>ざんねん</td><td>sayang sekali</td></tr>
+            <tr><td>しずか</td><td>tenang</td></tr>
+            <tr><td>しゅくだい</td><td>PR / pekerjaan rumah</td></tr>
+            <tr><td>しんせつ</td><td>baik hati</td></tr>
+            <tr><td>しんぱい</td><td>khawatir</td></tr>
+            <tr><td>じょうず</td><td>pandai</td></tr>
+            <tr><td>すき</td><td>suka</td></tr>
+            <tr><td>すごい</td><td>hebat</td></tr>
+            <tr><td>すてき</td><td>bagus / keren</td></tr>
+            <tr><td>すばらしい</td><td>luar biasa</td></tr>
+            <tr><td>たいせつ</td><td>penting</td></tr>
+            <tr><td>たいへん</td><td>berat / susah</td></tr>
+            <tr><td>たかい</td><td>mahal / tinggi</td></tr>
+            <tr><td>だいじょうぶ</td><td>tidak apa-apa</td></tr>
+            <tr><td>だいすき</td><td>sangat suka</td></tr>
+            <tr><td>ちいさい</td><td>kecil</td></tr>
+            <tr><td>つまらない</td><td>membosankan</td></tr>
+            <tr><td>つめたい</td><td>dingin (benda)</td></tr>
+            <tr><td>とけい</td><td>jam</td></tr>
+            <tr><td>にぎやか</td><td>ramai</td></tr>
+            <tr><td>ひくい</td><td>rendah</td></tr>
+            <tr><td>ひま</td><td>luang</td></tr>
+            <tr><td>ふべん</td><td>tidak praktis</td></tr>
+            <tr><td>ふるい</td><td>lama</td></tr>
+            <tr><td>へた</td><td>tidak pandai</td></tr>
+            <tr><td>へん</td><td>aneh</td></tr>
+            <tr><td>べんり</td><td>praktis</td></tr>
+            <tr><td>ほしい</td><td>ingin (benda)</td></tr>
+            <tr><td>まずい</td><td>tidak enak</td></tr>
+            <tr><td>むずかしい</td><td>sulit</td></tr>
+            <tr><td>もんだい</td><td>masalah / soal</td></tr>
+            <tr><td>やさしい</td><td>mudah / baik hati</td></tr>
+            <tr><td>やすい</td><td>murah</td></tr>
+            <tr><td>ゆうめい</td><td>terkenal</td></tr>
+            <tr><td>らく</td><td>mudah / lega</td></tr>
+            <tr><td>れい</td><td>contoh</td></tr>
+            <tr><td>わるい</td><td>buruk</td></tr>
+            <tr><td>忙しい</td><td>sibuk</td></tr>
+            <tr><td>楽しい</td><td>menyenangkan</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Cuaca & musim <span class="badge">11</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あき</td><td>gugur</td></tr>
+            <tr><td>あめ</td><td>hujan</td></tr>
+            <tr><td>かぜ</td><td>angin / pilek</td></tr>
+            <tr><td>きせつ</td><td>musim</td></tr>
+            <tr><td>くもり</td><td>berawan</td></tr>
+            <tr><td>てんき</td><td>cuaca</td></tr>
+            <tr><td>なつ</td><td>panas</td></tr>
+            <tr><td>はる</td><td>semi</td></tr>
+            <tr><td>はれ</td><td>cerah</td></tr>
+            <tr><td>ふゆ</td><td>dingin</td></tr>
+            <tr><td>ゆき</td><td>salju</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Warna <span class="badge">8</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>あお</td><td>biru</td></tr>
+            <tr><td>あか</td><td>merah</td></tr>
+            <tr><td>いろ</td><td>warna</td></tr>
+            <tr><td>きいろ</td><td>kuning</td></tr>
+            <tr><td>くろ</td><td>hitam</td></tr>
+            <tr><td>しろ</td><td>putih</td></tr>
+            <tr><td>ちゃいろ</td><td>cokelat</td></tr>
+            <tr><td>ピンク</td><td>pink</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Kata tanya & ekspresi <span class="badge">20</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>ありがとう</td><td>terima kasih</td></tr>
+            <tr><td>いいえ</td><td>tidak</td></tr>
+            <tr><td>いつ</td><td>kapan</td></tr>
+            <tr><td>おはようございます</td><td>selamat pagi</td></tr>
+            <tr><td>こんにちは</td><td>halo (siang)</td></tr>
+            <tr><td>こんばんは</td><td>selamat malam</td></tr>
+            <tr><td>さようなら</td><td>selamat tinggal</td></tr>
+            <tr><td>すみません</td><td>permisi / maaf</td></tr>
+            <tr><td>どう</td><td>bagaimana</td></tr>
+            <tr><td>どうして</td><td>mengapa</td></tr>
+            <tr><td>どうぞ</td><td>silakan</td></tr>
+            <tr><td>どうも</td><td>terima kasih (ringkas)</td></tr>
+            <tr><td>どこ</td><td>di mana</td></tr>
+            <tr><td>どちら</td><td>yang mana (sopan)</td></tr>
+            <tr><td>どれ</td><td>yang mana</td></tr>
+            <tr><td>どんな</td><td>seperti apa</td></tr>
+            <tr><td>なぜ</td><td>mengapa</td></tr>
+            <tr><td>なに</td><td>apa</td></tr>
+            <tr><td>なん</td><td>apa</td></tr>
+            <tr><td>はい</td><td>ya</td></tr>
+          </tbody></table></div>
+          <h3 class="vocab-cat">Lainnya <span class="badge">129</span></h3>
+          <div class="table-wrap"><table class="vocab-table"><thead><tr><th>日本語</th><th>Arti</th></tr></thead><tbody>
+            <tr><td>Tシャツ</td><td>kaos</td></tr>
+            <tr><td>あいだ</td><td>antara</td></tr>
+            <tr><td>あそこ</td><td>sana</td></tr>
+            <tr><td>あとで</td><td>nanti</td></tr>
+            <tr><td>あなたの</td><td>milik kamu</td></tr>
+            <tr><td>あの</td><td>~ itu (jauh)</td></tr>
+            <tr><td>あれ</td><td>itu (jauh)</td></tr>
+            <tr><td>いつも</td><td>selalu</td></tr>
+            <tr><td>いみ</td><td>arti</td></tr>
+            <tr><td>いろいろ</td><td>berbagai</td></tr>
+            <tr><td>うえ</td><td>atas</td></tr>
+            <tr><td>うけつけ</td><td>resepsionis</td></tr>
+            <tr><td>うしろ</td><td>belakang</td></tr>
+            <tr><td>え</td><td>gambar</td></tr>
+            <tr><td>えいが</td><td>film</td></tr>
+            <tr><td>えんぴつ</td><td>pensil</td></tr>
+            <tr><td>おなか</td><td>perut</td></tr>
+            <tr><td>おなじ</td><td>sama</td></tr>
+            <tr><td>おみやげ</td><td>oleh-oleh</td></tr>
+            <tr><td>おんがく</td><td>musik</td></tr>
+            <tr><td>かお</td><td>wajah</td></tr>
+            <tr><td>かぎ</td><td>kunci</td></tr>
+            <tr><td>きっと</td><td>pasti</td></tr>
+            <tr><td>きんえん</td><td>dilarang merokok</td></tr>
+            <tr><td>きんし</td><td>larangan</td></tr>
+            <tr><td>くすり</td><td>obat</td></tr>
+            <tr><td>くち</td><td>mulut</td></tr>
+            <tr><td>ここ</td><td>sini</td></tr>
+            <tr><td>こたえ</td><td>jawaban</td></tr>
+            <tr><td>ことば</td><td>kata</td></tr>
+            <tr><td>この</td><td>~ ini</td></tr>
+            <tr><td>これ</td><td>ini</td></tr>
+            <tr><td>さき</td><td>tadi / ujung</td></tr>
+            <tr><td>ざっし</td><td>majalah</td></tr>
+            <tr><td>しか</td><td>hanya (dengan negatif)</td></tr>
+            <tr><td>しかし</td><td>tetapi</td></tr>
+            <tr><td>しけん</td><td>ujian</td></tr>
+            <tr><td>しごと</td><td>pekerjaan</td></tr>
+            <tr><td>した</td><td>bawah</td></tr>
+            <tr><td>しつもん</td><td>pertanyaan</td></tr>
+            <tr><td>しゃしん</td><td>foto</td></tr>
+            <tr><td>しゅみ</td><td>hobi</td></tr>
+            <tr><td>しんぶん</td><td>koran</td></tr>
+            <tr><td>じしょ</td><td>kamus</td></tr>
+            <tr><td>じゅぎょう</td><td>kelas / pelajaran</td></tr>
+            <tr><td>すぐ</td><td>segera</td></tr>
+            <tr><td>すこし</td><td>sedikit</td></tr>
+            <tr><td>ずっと</td><td>terus / jauh lebih</td></tr>
+            <tr><td>せ</td><td>punggung / tinggi badan</td></tr>
+            <tr><td>せいせき</td><td>nilai</td></tr>
+            <tr><td>せき</td><td>batuk</td></tr>
+            <tr><td>せんぷうき</td><td>kipas angin</td></tr>
+            <tr><td>ぜひ</td><td>pasti / dengan senang hati</td></tr>
+            <tr><td>ぜんぜん</td><td>sama sekali (dengan negatif)</td></tr>
+            <tr><td>そうじき</td><td>vacuum cleaner</td></tr>
+            <tr><td>そこ</td><td>situ</td></tr>
+            <tr><td>そして</td><td>lalu</td></tr>
+            <tr><td>そと</td><td>luar</td></tr>
+            <tr><td>その</td><td>~ itu</td></tr>
+            <tr><td>そば</td><td>dekat</td></tr>
+            <tr><td>それ</td><td>itu</td></tr>
+            <tr><td>それから</td><td>setelah itu</td></tr>
+            <tr><td>それに</td><td>selain itu</td></tr>
+            <tr><td>たくさん</td><td>banyak</td></tr>
+            <tr><td>たとえば</td><td>misalnya</td></tr>
+            <tr><td>たぶん</td><td>mungkin</td></tr>
+            <tr><td>たんす</td><td>lemari</td></tr>
+            <tr><td>だから</td><td>karena itu</td></tr>
+            <tr><td>だけ</td><td>hanya</td></tr>
+            <tr><td>だれの</td><td>milik siapa</td></tr>
+            <tr><td>ちかく</td><td>dekat</td></tr>
+            <tr><td>ちょっと</td><td>sedikit</td></tr>
+            <tr><td>つめ</td><td>kuku</td></tr>
+            <tr><td>てがみ</td><td>surat</td></tr>
+            <tr><td>ですから</td><td>karena itu (sopan)</td></tr>
+            <tr><td>でも</td><td>tetapi</td></tr>
+            <tr><td>でんき</td><td>listrik / lampu</td></tr>
+            <tr><td>でんしレンジ</td><td>microwave</td></tr>
+            <tr><td>とおく</td><td>jauh</td></tr>
+            <tr><td>ときどき</td><td>kadang-kadang</td></tr>
+            <tr><td>とくに</td><td>terutama</td></tr>
+            <tr><td>とても</td><td>sangat</td></tr>
+            <tr><td>となり</td><td>sebelah</td></tr>
+            <tr><td>どの</td><td>~ yang mana</td></tr>
+            <tr><td>なか</td><td>dalam</td></tr>
+            <tr><td>ねつ</td><td>demam</td></tr>
+            <tr><td>のど</td><td>tenggorokan</td></tr>
+            <tr><td>は</td><td>gigi / daun</td></tr>
+            <tr><td>はさみ</td><td>gunting</td></tr>
+            <tr><td>はな</td><td>hidung / bunga</td></tr>
+            <tr><td>ほか</td><td>lain</td></tr>
+            <tr><td>ぼうし</td><td>topi</td></tr>
+            <tr><td>まえ</td><td>sebelum / depan</td></tr>
+            <tr><td>まず</td><td>pertama-tama</td></tr>
+            <tr><td>また</td><td>lagi</td></tr>
+            <tr><td>または</td><td>atau</td></tr>
+            <tr><td>まだ</td><td>masih / belum</td></tr>
+            <tr><td>みんな</td><td>semua</td></tr>
+            <tr><td>むね</td><td>dada</td></tr>
+            <tr><td>むりょう</td><td>gratis</td></tr>
+            <tr><td>も</td><td>juga</td></tr>
+            <tr><td>もう</td><td>sudah / lagi</td></tr>
+            <tr><td>もの</td><td>benda</td></tr>
+            <tr><td>やきゅう</td><td>baseball</td></tr>
+            <tr><td>やっと</td><td>akhirnya</td></tr>
+            <tr><td>ゆうりょう</td><td>berbayar</td></tr>
+            <tr><td>ゆび</td><td>jari</td></tr>
+            <tr><td>よく</td><td>sering / dengan baik</td></tr>
+            <tr><td>よこ</td><td>samping</td></tr>
+            <tr><td>よやく</td><td>reservasi</td></tr>
+            <tr><td>りょかん</td><td>penginapan Jepang</td></tr>
+            <tr><td>りょこう</td><td>perjalanan</td></tr>
+            <tr><td>れんしゅう</td><td>latihan</td></tr>
+            <tr><td>わたしの</td><td>milik saya</td></tr>
+            <tr><td>アイロン</td><td>setrika</td></tr>
+            <tr><td>カード</td><td>kartu</td></tr>
+            <tr><td>コンピューター</td><td>komputer</td></tr>
+            <tr><td>コート</td><td>mantel</td></tr>
+            <tr><td>サッカー</td><td>sepak bola</td></tr>
+            <tr><td>シャツ</td><td>kemeja</td></tr>
+            <tr><td>スカート</td><td>rok</td></tr>
+            <tr><td>ストーブ</td><td>pemanas</td></tr>
+            <tr><td>スポーツ</td><td>olahraga</td></tr>
+            <tr><td>ズボン</td><td>celana</td></tr>
+            <tr><td>テスト</td><td>tes</td></tr>
+            <tr><td>テニス</td><td>tenis</td></tr>
+            <tr><td>バスケットボール</td><td>basket</td></tr>
+            <tr><td>ラジオ</td><td>radio</td></tr>
+            <tr><td>当然</td><td>wajar</td></tr>
+          </tbody></table></div>
 
         <div class="card mt-2">
-          <p class="muted mb-0">Ini starter set. Untuk daftar lengkap per lesson, pakai buku Translation & Grammar Notes Minna + Anki deck. Halaman ini untuk review cepat di HP.</p>
+          <h3>Cara pakai</h3>
+          <p class="muted mb-0">Baca per kategori, lalu uji di <a href="quiz.html">Kuis → Kosakata N5</a>. Untuk menulis, gunakan halaman <a href="writing.html">Menulis</a>. Daftar ini kerangka awal — kamu bisa koreksi arti di catatan pribadi.</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container"><p>Catatan Bahasa Jepang · Vocabulary</p></div>
+    <div class="container"><p>Catatan Bahasa Jepang · Vocabulary N5</p></div>
   </footer>
   <script src="js/main.js"></script>
+  <script>
+    document.getElementById('vocab-search').addEventListener('input', function() {
+      var q = this.value.trim().toLowerCase();
+      document.querySelectorAll('.vocab-table tbody tr').forEach(function(tr) {
+        var t = tr.textContent.toLowerCase();
+        tr.style.display = (!q || t.indexOf(q) !== -1) ? '' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
