@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roadmap Belajar | 0 → N3 · Catatan Bahasa Jepang</title>
+  <meta name="description" content="Roadmap jelas belajar bahasa Jepang dari nol sampai JLPT N3 berdasarkan Minna no Nihongo dan Irodori.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">日本語<span>Notes</span></a>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav">
+        <a href="index.html">Beranda</a>
+        <a href="roadmap.html" class="active">Roadmap</a>
+        <a href="kana.html">Kana</a>
+        <a href="writing.html">Menulis</a>
+        <a href="lessons.html">Minna</a>
+        <a href="vocab.html">Vocab</a>
+        <a href="grammar.html">Grammar</a>
+        <a href="kanji.html">Kanji</a>
+        <a href="notes.html">Catatan</a>
+        <a href="resources.html">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Roadmap 0 → N3</h1>
+        <p class="lead mb-2">Urutan yang realistis. Jangan loncat. Centang yang sudah selesai — progress tersimpan di browser kamu.</p>
+
+        <div class="card mb-2" style="padding: 1rem 1.25rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+            <strong>Progress</strong>
+            <span id="progress-text" class="small muted">0 / 0 selesai</span>
+          </div>
+          <div style="height:8px;background:var(--bg-soft);border-radius:4px;overflow:hidden;">
+            <div id="progress-bar" style="height:100%;width:0%;background:var(--primary);transition:width 0.3s;"></div>
+          </div>
+        </div>
+
+        <div class="roadmap-timeline">
+
+          <!-- START -->
+          <div class="roadmap-item">
+            <div class="roadmap-dot"></div>
+            <span class="roadmap-level level-start">Fondasi</span>
+            <h3>Hiragana & Katakana</h3>
+            <p>Wajib 100% lancar baca & tulis sebelum masuk lesson. Tanpa ini, semua materi selanjutnya akan susah.</p>
+            <ul class="check-list">
+              <li>
+                <input type="checkbox" id="chk-hira">
+                <label for="chk-hira">Hiragana (46 dasar + dakuten + combination)</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-kata">
+                <label for="chk-kata">Katakana (46 dasar + dakuten + combination)</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-kana-speed">
+                <label for="chk-kana-speed">Bisa baca kata sederhana tanpa terbata-bata</label>
+              </li>
+            </ul>
+            <div class="tag-list mt-2">
+              <span class="tag">Target: 1–3 minggu</span>
+              <a href="kana.html" class="tag" style="background:var(--primary);color:#fff;">Buka tabel →</a>
+            </div>
+          </div>
+
+          <!-- N5 / Minna 1-25 -->
+          <div class="roadmap-item n5">
+            <div class="roadmap-dot"></div>
+            <span class="roadmap-level level-n5">N5 · Minna Shokyuu I</span>
+            <h3>Lesson 1 – 25 (Minna no Nihongo 1)</h3>
+            <p>Dasar kalimat, partikel inti, kata kerja masu-form, kata sifat, te-form, waktu, angka, dan percakapan sehari-hari. Setara JLPT N5.</p>
+            <ul class="check-list">
+              <li>
+                <input type="checkbox" id="chk-l1-8">
+                <label for="chk-l1-8">Lesson 1–8: Perkenalan, kore/sore/are, lokasi, waktu, gerakan, undangan, kata sifat</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-l9-16">
+                <label for="chk-l9-16">Lesson 9–16: Preferensi, belanja, hitungan, pengalaman, permintaan, keluarga, arah</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-l17-25">
+                <label for="chk-l17-25">Lesson 17–25: te-form, permission, progressive, comparison, nai-form, harus, dll</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-n5-vocab">
+                <label for="chk-n5-vocab">Kosakata inti N5 (±800–1000 kata) mulai dihafal</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-n5-kanji">
+                <label for="chk-n5-kanji">Kanji N5 (±100–120 karakter) dikenali</label>
+              </li>
+            </ul>
+            <div class="tag-list mt-2">
+              <span class="tag">≈ 4–8 bulan (tergantung intensitas)</span>
+              <span class="tag">Irodori Starter + Elementary 1 sebagai pelengkap praktik</span>
+            </div>
+          </div>
+
+          <!-- N4 / Minna 26-50 -->
+          <div class="roadmap-item n4">
+            <div class="roadmap-dot"></div>
+            <span class="roadmap-level level-n4">N4 · Minna Shokyuu II</span>
+            <h3>Lesson 26 – 50 (Minna no Nihongo 2)</h3>
+            <p>Potential form, conditional (tara/ba/to), passive, causative, keigo dasar, lebih banyak grammar kompleks. Setara JLPT N4.</p>
+            <ul class="check-list">
+              <li>
+                <input type="checkbox" id="chk-l26-35">
+                <label for="chk-l26-35">Lesson 26–35: Potential, conditional, transitive/intransitive, experience, dll</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-l36-45">
+                <label for="chk-l36-45">Lesson 36–45: Passive, causative, honorific/humble, complex sentences</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-l46-50">
+                <label for="chk-l46-50">Lesson 46–50: Review + grammar lanjutan N4</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-n4-vocab">
+                <label for="chk-n4-vocab">Kosakata N4 ditambah (±1500 total)</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-n4-kanji">
+                <label for="chk-n4-kanji">Kanji N4 (±300 total) dikuasai</label>
+              </li>
+            </ul>
+            <div class="tag-list mt-2">
+              <span class="tag">Irodori Elementary 2 + Pre-Intermediate mulai relevan</span>
+            </div>
+          </div>
+
+          <!-- N3 -->
+          <div class="roadmap-item n3">
+            <div class="roadmap-dot"></div>
+            <span class="roadmap-level level-n3">N3</span>
+            <h3>Materi Intermediate (setelah Minna 50)</h3>
+            <p>Minna Intermediate atau buku setara + grammar N3 (～ために, ～のに, ～ように, ～ばかり, dll). Fokus reading & listening yang lebih panjang.</p>
+            <ul class="check-list">
+              <li>
+                <input type="checkbox" id="chk-n3-grammar">
+                <label for="chk-n3-grammar">Grammar inti N3 dikuasai (≈100+ pola)</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-n3-vocab">
+                <label for="chk-n3-vocab">Kosakata N3 (±3000–3500 total)</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-n3-kanji">
+                <label for="chk-n3-kanji">Kanji N3 (±650 total)</label>
+              </li>
+              <li>
+                <input type="checkbox" id="chk-n3-listening">
+                <label for="chk-n3-listening">Listening & reading level N3 bisa diikuti</label>
+              </li>
+            </ul>
+            <div class="tag-list mt-2">
+              <span class="tag">Irodori Pre-Intermediate (A2/B1) sangat membantu praktik</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card mt-2">
+          <h3>Catatan penting</h3>
+          <p class="muted mb-0">Roadmap ini bukan jadwal kaku. Yang penting urutannya: <strong>Kana → Minna 1–25 (N5) → Minna 26–50 (N4) → N3</strong>. Irodori dipakai paralel sebagai latihan komunikasi nyata (can-do), bukan pengganti Minna untuk grammar sistematis.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Catatan Bahasa Jepang · Berdasarkan Minna no Nihongo & Irodori</p>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

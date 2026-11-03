@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catatan Pribadi | Catatan Bahasa Jepang</title>
+  <meta name="description" content="Tulis catatan belajar bahasa Jepang pribadi. Tersimpan di browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">日本語<span>Notes</span></a>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav">
+        <a href="index.html">Beranda</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="kana.html">Kana</a>
+        <a href="writing.html">Menulis</a>
+        <a href="lessons.html">Minna</a>
+        <a href="vocab.html">Vocab</a>
+        <a href="grammar.html">Grammar</a>
+        <a href="kanji.html">Kanji</a>
+        <a href="notes.html" class="active">Catatan</a>
+        <a href="resources.html">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Catatan Pribadi</h1>
+        <p class="lead mb-2">Tulis apa saja: kesalahan yang sering muncul, contoh kalimat, kosakata sulit, atau insight dari lesson. Tersimpan otomatis di browser ini (localStorage).</p>
+
+        <div class="card">
+          <textarea id="personal-notes" class="notes-area" placeholder="Contoh:
+- Lesson 5: へ vs に masih sering tertukar
+- て-form Group 1: う→って, く→いて, ぐ→いで, す→して, つ→って, ぬ/ぶ/む→んで, る→って
+- Kata yang sulit: 遅刻する, 約束を守る
+- ..."></textarea>
+
+          <div class="notes-actions">
+            <button id="save-notes" class="btn btn-primary btn-sm">Simpan</button>
+            <button id="clear-notes" class="btn btn-outline btn-sm">Kosongkan</button>
+            <span id="notes-status" class="small"></span>
+          </div>
+        </div>
+
+        <div class="card mt-2">
+          <h3>Penting</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-muted);font-size:0.95rem;">
+            <li>Data hanya tersimpan di browser / perangkat ini. Tidak sync ke cloud.</li>
+            <li>Kalau clear data browser atau ganti device, catatan hilang.</li>
+            <li>Untuk backup: copy-paste isi ke Notes di HP / Google Docs secara berkala.</li>
+            <li>Nanti kalau mau multi-device, bisa dipindah ke backend sederhana (Supabase dll) — tapi untuk sekarang ini sudah cukup.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Catatan Bahasa Jepang · Personal Notes</p>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

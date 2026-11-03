@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Latihan Menulis + Animasi Stroke | Catatan Bahasa Jepang</title>
+  <meta name="description" content="Latihan menulis Hiragana, Katakana, Kanji dengan animasi stroke, counter latihan, dan export ke Anki.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .writing-layout { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 900px) {
+      .writing-layout { grid-template-columns: 180px 1fr 1fr; align-items: start; }
+    }
+    @media (min-width: 600px) and (max-width: 899px) {
+      .writing-layout { grid-template-columns: 160px 1fr; }
+      .practice-col { grid-column: 1 / -1; }
+    }
+    .char-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+      gap: 0.3rem; max-height: 420px; overflow-y: auto; padding: 0.2rem;
+    }
+    .char-btn {
+      aspect-ratio: 1; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg-card); font-family: var(--font-serif); font-size: 1.1rem;
+      cursor: pointer; color: var(--primary); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; position: relative; line-height: 1.1;
+    }
+    .char-btn:hover { background: var(--bg-soft); }
+    .char-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .char-btn.mastered { border-color: var(--success); box-shadow: inset 0 0 0 2px var(--success); }
+    .char-btn .cnt {
+      font-size: 0.55rem; font-family: var(--font-sans); opacity: 0.7; margin-top: 1px;
+    }
+    .char-btn.active .cnt { opacity: 0.9; }
+    .panel {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.15rem; box-shadow: var(--shadow);
+    }
+    .panel-title { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .guide-char { text-align: center; margin-bottom: 0.5rem; }
+    .guide-char .big { font-family: var(--font-serif); font-size: clamp(2.5rem, 8vw, 3.5rem); color: var(--primary); line-height: 1.2; }
+    .guide-char .meta { color: var(--text-muted); font-size: 0.9rem; }
+    .anim-box {
+      width: 100%; max-width: 280px; margin: 0 auto; aspect-ratio: 1;
+      border: 2px solid var(--border); border-radius: 12px; background: #faf8f4;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .anim-box svg { width: 90%; height: 90%; }
+    .anim-status { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; min-height: 1.3em; }
+    .canvas-wrap {
+      position: relative; width: 100%; max-width: 280px; margin: 0 auto; aspect-ratio: 1;
+      border: 2px solid var(--border); border-radius: 12px; overflow: hidden; background: #faf8f4; touch-action: none;
+    }
+    .canvas-wrap canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+    .guide-overlay {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: clamp(6rem, 28vw, 9rem);
+      color: rgba(26, 42, 74, 0.07); pointer-events: none; user-select: none; line-height: 1;
+    }
+    .guide-overlay.hidden { display: none; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-top: 0.75rem; }
+    .section-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .loading-anim { color: var(--text-muted); font-size: 0.9rem; text-align: center; }
+    .stats-bar {
+      display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; justify-content: center;
+      align-items: center; margin-bottom: 1rem; padding: 0.75rem 1rem;
+      background: var(--bg-soft); border-radius: var(--radius-sm); font-size: 0.9rem;
+    }
+    .stats-bar strong { color: var(--primary); }
+    .progress-pill {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: #fff; border: 1px solid var(--border); border-radius: 999px;
+      padding: 0.25rem 0.75rem; font-size: 0.85rem;
+    }
+    .practice-stats {
+      text-align: center; margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-muted);
+    }
+    .practice-stats strong { color: var(--primary); font-size: 1.1rem; }
+    .master-btn.done {
+      background: var(--success) !important; border-color: var(--success) !important; color: #fff !important;
+    }
+    .export-box {
+      margin-top: 1.25rem; padding: 1rem; background: var(--bg-soft);
+      border-radius: var(--radius-sm); border: 1px solid var(--border);
+    }
+    .export-box textarea {
+      width: 100%; min-height: 100px; font-family: ui-monospace, monospace; font-size: 0.85rem;
+      padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px;
+      background: #fff; resize: vertical; margin: 0.5rem 0;
+    }
+    .export-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">日本語<span>Notes</span></a>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav">
+        <a href="index.html">Beranda</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="kana.html">Kana</a>
+        <a href="writing.html" class="active">Menulis</a>
+        <a href="lessons.html">Minna</a>
+        <a href="vocab.html">Vocab</a>
+        <a href="grammar.html">Grammar</a>
+        <a href="kanji.html">Kanji</a>
+        <a href="notes.html">Catatan</a>
+        <a href="resources.html">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Latihan Menulis</h1>
+        <p class="lead mb-2">Animasi stroke + canvas. Setiap goresan dihitung. Tandai yang sudah lancar, lalu export ke Anki.</p>
+
+        <div class="stats-bar" id="global-stats">
+          <span class="progress-pill">Ditulis: <strong id="stat-writes">0</strong>×</span>
+          <span class="progress-pill">Lancar: <strong id="stat-mastered">0</strong></span>
+          <button class="btn btn-outline btn-sm" type="button" id="btn-export-open">Export Anki</button>
+          <button class="btn btn-outline btn-sm" type="button" id="btn-reset-char" title="Reset hitungan huruf yang sedang dipilih">Reset huruf ini</button>
+          <button class="btn btn-outline btn-sm" type="button" id="btn-reset-all" title="Hapus semua progress latihan">Reset semua</button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="hira">Hiragana</button>
+          <button class="tab-btn" data-tab="kata">Katakana</button>
+          <button class="tab-btn" data-tab="kanji">Kanji N5</button>
+        </div>
+
+        <!-- HIRA -->
+        <div id="hira" class="tab-panel active">
+          <div class="writing-layout">
+            <div>
+              <div class="section-label">Pilih huruf</div>
+              <div class="char-grid" id="hira-grid"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-title">ANIMASI STROKE ORDER</div>
+              <div class="guide-char">
+                <div class="big" id="hira-display">あ</div>
+                <div class="meta" id="hira-meta">a</div>
+              </div>
+              <div class="anim-box" id="hira-anim"><span class="loading-anim">Memuat…</span></div>
+              <div class="anim-status" id="hira-status"></div>
+              <div class="btn-row">
+                <button class="btn btn-primary btn-sm" type="button" data-play="hira">▶ Putar</button>
+                <button class="btn btn-outline btn-sm" type="button" data-play="hira">Ulang</button>
+              </div>
+            </div>
+            <div class="panel practice-col">
+              <div class="panel-title">LATIHAN TULIS</div>
+              <div class="canvas-wrap">
+                <div class="guide-overlay" id="hira-overlay">あ</div>
+                <canvas id="hira-canvas" width="280" height="280"></canvas>
+              </div>
+              <div class="practice-stats">Sudah ditulis: <strong id="hira-count">0</strong>×</div>
+              <div class="btn-row">
+                <button class="btn btn-outline btn-sm" type="button" data-clear="hira">Hapus</button>
+                <button class="btn btn-outline btn-sm" type="button" data-guide="hira">Toggle Guide</button>
+                <button class="btn btn-outline btn-sm" type="button" data-count="hira">+1 Tulisan</button>
+                <button class="btn btn-primary btn-sm master-btn" type="button" data-master="hira" id="hira-master-btn">Tandai Lancar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KATA -->
+        <div id="kata" class="tab-panel">
+          <div class="writing-layout">
+            <div>
+              <div class="section-label">Pilih huruf</div>
+              <div class="char-grid" id="kata-grid"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-title">ANIMASI STROKE ORDER</div>
+              <div class="guide-char">
+                <div class="big" id="kata-display">ア</div>
+                <div class="meta" id="kata-meta">a</div>
+              </div>
+              <div class="anim-box" id="kata-anim"><span class="loading-anim">Memuat…</span></div>
+              <div class="anim-status" id="kata-status"></div>
+              <div class="btn-row">
+                <button class="btn btn-primary btn-sm" type="button" data-play="kata">▶ Putar</button>
+                <button class="btn btn-outline btn-sm" type="button" data-play="kata">Ulang</button>
+              </div>
+            </div>
+            <div class="panel practice-col">
+              <div class="panel-title">LATIHAN TULIS</div>
+              <div class="canvas-wrap">
+                <div class="guide-overlay" id="kata-overlay">ア</div>
+                <canvas id="kata-canvas" width="280" height="280"></canvas>
+              </div>
+              <div class="practice-stats">Sudah ditulis: <strong id="kata-count">0</strong>×</div>
+              <div class="btn-row">
+                <button class="btn btn-outline btn-sm" type="button" data-clear="kata">Hapus</button>
+                <button class="btn btn-outline btn-sm" type="button" data-guide="kata">Toggle Guide</button>
+                <button class="btn btn-outline btn-sm" type="button" data-count="kata">+1 Tulisan</button>
+                <button class="btn btn-primary btn-sm master-btn" type="button" data-master="kata" id="kata-master-btn">Tandai Lancar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KANJI -->
+        <div id="kanji" class="tab-panel">
+          <div class="writing-layout">
+            <div>
+              <div class="section-label">Pilih kanji</div>
+              <div class="char-grid" id="kanji-grid"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-title">ANIMASI STROKE ORDER</div>
+              <div class="guide-char">
+                <div class="big" id="kanji-display">日</div>
+                <div class="meta" id="kanji-meta">にち / ひ · hari, matahari</div>
+              </div>
+              <div class="anim-box" id="kanji-anim"><span class="loading-anim">Memuat…</span></div>
+              <div class="anim-status" id="kanji-status"></div>
+              <div class="btn-row">
+                <button class="btn btn-primary btn-sm" type="button" data-play="kanji">▶ Putar</button>
+                <button class="btn btn-outline btn-sm" type="button" data-play="kanji">Ulang</button>
+              </div>
+            </div>
+            <div class="panel practice-col">
+              <div class="panel-title">LATIHAN TULIS</div>
+              <div class="canvas-wrap">
+                <div class="guide-overlay" id="kanji-overlay">日</div>
+                <canvas id="kanji-canvas" width="280" height="280"></canvas>
+              </div>
+              <div class="practice-stats">Sudah ditulis: <strong id="kanji-count">0</strong>×</div>
+              <div class="btn-row">
+                <button class="btn btn-outline btn-sm" type="button" data-clear="kanji">Hapus</button>
+                <button class="btn btn-outline btn-sm" type="button" data-guide="kanji">Toggle Guide</button>
+                <button class="btn btn-outline btn-sm" type="button" data-count="kanji">+1 Tulisan</button>
+                <button class="btn btn-primary btn-sm master-btn" type="button" data-master="kanji" id="kanji-master-btn">Tandai Lancar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Export panel -->
+        <div class="export-box" id="export-panel" hidden>
+          <strong>Export ke Anki</strong>
+          <p class="small muted mb-0">Huruf yang sudah ditandai <em>lancar</em>. Format: depan → tab → belakang. Import di Anki: File → Import.</p>
+          <textarea id="export-text" readonly placeholder="Belum ada yang ditandai lancar…"></textarea>
+          <div class="export-actions">
+            <button class="btn btn-primary btn-sm" type="button" id="btn-copy-anki">Salin ke clipboard</button>
+            <button class="btn btn-outline btn-sm" type="button" id="btn-download-anki">Download .txt</button>
+            <button class="btn btn-outline btn-sm" type="button" id="btn-export-close">Tutup</button>
+          </div>
+          <p class="small muted mt-1 mb-0" id="copy-feedback"></p>
+        </div>
+
+        <div class="card mt-2">
+          <h3>Cara pakai</h3>
+          <ol style="padding-left:1.2rem;color:var(--text-muted);font-size:0.95rem;">
+            <li>Pilih huruf → tonton animasi → tulis di canvas.</li>
+            <li>Tekan <strong>+1 Tulisan</strong> setiap selesai 1× (atau setelah beberapa goresan). Target 5–10× per huruf.</li>
+            <li>Kalau sudah nyaman, tekan <strong>Tandai Lancar</strong>.</li>
+            <li>Klik <strong>Export Anki</strong> → salin / download → import ke Anki.</li>
+          </ol>
+          <p class="small muted mb-0">Progress tersimpan di browser (localStorage). Animasi butuh internet; canvas &amp; counter jalan offline.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Catatan Bahasa Jepang · Latihan Menulis<br>
+      Stroke order: <a href="https://kanjivg.tagaini.net/" target="_blank" rel="noopener">KanjiVG</a></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const HIRA = [
+      {c:'あ',r:'a'},{c:'い',r:'i'},{c:'う',r:'u'},{c:'え',r:'e'},{c:'お',r:'o'},
+      {c:'か',r:'ka'},{c:'き',r:'ki'},{c:'く',r:'ku'},{c:'け',r:'ke'},{c:'こ',r:'ko'},
+      {c:'さ',r:'sa'},{c:'し',r:'shi'},{c:'す',r:'su'},{c:'せ',r:'se'},{c:'そ',r:'so'},
+      {c:'た',r:'ta'},{c:'ち',r:'chi'},{c:'つ',r:'tsu'},{c:'て',r:'te'},{c:'と',r:'to'},
+      {c:'な',r:'na'},{c:'に',r:'ni'},{c:'ぬ',r:'nu'},{c:'ね',r:'ne'},{c:'の',r:'no'},
+      {c:'は',r:'ha'},{c:'ひ',r:'hi'},{c:'ふ',r:'fu'},{c:'へ',r:'he'},{c:'ほ',r:'ho'},
+      {c:'ま',r:'ma'},{c:'み',r:'mi'},{c:'む',r:'mu'},{c:'め',r:'me'},{c:'も',r:'mo'},
+      {c:'や',r:'ya'},{c:'ゆ',r:'yu'},{c:'よ',r:'yo'},
+      {c:'ら',r:'ra'},{c:'り',r:'ri'},{c:'る',r:'ru'},{c:'れ',r:'re'},{c:'ろ',r:'ro'},
+      {c:'わ',r:'wa'},{c:'を',r:'wo'},{c:'ん',r:'n'},
+      {c:'が',r:'ga'},{c:'ぎ',r:'gi'},{c:'ぐ',r:'gu'},{c:'げ',r:'ge'},{c:'ご',r:'go'},
+      {c:'ざ',r:'za'},{c:'じ',r:'ji'},{c:'ず',r:'zu'},{c:'ぜ',r:'ze'},{c:'ぞ',r:'zo'},
+      {c:'だ',r:'da'},{c:'ぢ',r:'ji'},{c:'づ',r:'zu'},{c:'で',r:'de'},{c:'ど',r:'do'},
+      {c:'ば',r:'ba'},{c:'び',r:'bi'},{c:'ぶ',r:'bu'},{c:'べ',r:'be'},{c:'ぼ',r:'bo'},
+      {c:'ぱ',r:'pa'},{c:'ぴ',r:'pi'},{c:'ぷ',r:'pu'},{c:'ぺ',r:'pe'},{c:'ぽ',r:'po'}
+    ];
+    const KATA = [
+      {c:'ア',r:'a'},{c:'イ',r:'i'},{c:'ウ',r:'u'},{c:'エ',r:'e'},{c:'オ',r:'o'},
+      {c:'カ',r:'ka'},{c:'キ',r:'ki'},{c:'ク',r:'ku'},{c:'ケ',r:'ke'},{c:'コ',r:'ko'},
+      {c:'サ',r:'sa'},{c:'シ',r:'shi'},{c:'ス',r:'su'},{c:'セ',r:'se'},{c:'ソ',r:'so'},
+      {c:'タ',r:'ta'},{c:'チ',r:'chi'},{c:'ツ',r:'tsu'},{c:'テ',r:'te'},{c:'ト',r:'to'},
+      {c:'ナ',r:'na'},{c:'ニ',r:'ni'},{c:'ヌ',r:'nu'},{c:'ネ',r:'ne'},{c:'ノ',r:'no'},
+      {c:'ハ',r:'ha'},{c:'ヒ',r:'hi'},{c:'フ',r:'fu'},{c:'ヘ',r:'he'},{c:'ホ',r:'ho'},
+      {c:'マ',r:'ma'},{c:'ミ',r:'mi'},{c:'ム',r:'mu'},{c:'メ',r:'me'},{c:'モ',r:'mo'},
+      {c:'ヤ',r:'ya'},{c:'ユ',r:'yu'},{c:'ヨ',r:'yo'},
+      {c:'ラ',r:'ra'},{c:'リ',r:'ri'},{c:'ル',r:'ru'},{c:'レ',r:'re'},{c:'ロ',r:'ro'},
+      {c:'ワ',r:'wa'},{c:'ヲ',r:'wo'},{c:'ン',r:'n'},
+      {c:'ガ',r:'ga'},{c:'ギ',r:'gi'},{c:'グ',r:'gu'},{c:'ゲ',r:'ge'},{c:'ゴ',r:'go'},
+      {c:'ザ',r:'za'},{c:'ジ',r:'ji'},{c:'ズ',r:'zu'},{c:'ゼ',r:'ze'},{c:'ゾ',r:'zo'},
+      {c:'ダ',r:'da'},{c:'ヂ',r:'ji'},{c:'ヅ',r:'zu'},{c:'デ',r:'de'},{c:'ド',r:'do'},
+      {c:'バ',r:'ba'},{c:'ビ',r:'bi'},{c:'ブ',r:'bu'},{c:'ベ',r:'be'},{c:'ボ',r:'bo'},
+      {c:'パ',r:'pa'},{c:'ピ',r:'pi'},{c:'プ',r:'pu'},{c:'ペ',r:'pe'},{c:'ポ',r:'po'}
+    ];
+    const KANJI = [
+      {c:'一',r:'いち / ひと',m:'satu'},{c:'二',r:'に / ふた',m:'dua'},{c:'三',r:'さん / み',m:'tiga'},
+      {c:'四',r:'し / よん',m:'empat'},{c:'五',r:'ご / いつ',m:'lima'},{c:'六',r:'ろく / む',m:'enam'},
+      {c:'七',r:'しち / なな',m:'tujuh'},{c:'八',r:'はち / や',m:'delapan'},{c:'九',r:'きゅう / ここの',m:'sembilan'},
+      {c:'十',r:'じゅう / とお',m:'sepuluh'},{c:'百',r:'ひゃく',m:'seratus'},{c:'千',r:'せん',m:'seribu'},
+      {c:'万',r:'まん',m:'10 ribu'},{c:'円',r:'えん',m:'yen'},{c:'日',r:'にち / ひ',m:'hari, matahari'},
+      {c:'月',r:'げつ / つき',m:'bulan'},{c:'火',r:'か / ひ',m:'api'},{c:'水',r:'すい / みず',m:'air'},
+      {c:'木',r:'もく / き',m:'pohon'},{c:'金',r:'きん / かね',m:'emas, uang'},{c:'土',r:'ど / つち',m:'tanah'},
+      {c:'人',r:'じん / ひと',m:'orang'},{c:'大',r:'だい / おお',m:'besar'},{c:'小',r:'しょう / ちい',m:'kecil'},
+      {c:'中',r:'ちゅう / なか',m:'tengah'},{c:'上',r:'じょう / うえ',m:'atas'},{c:'下',r:'か / した',m:'bawah'},
+      {c:'左',r:'さ / ひだり',m:'kiri'},{c:'右',r:'う / みぎ',m:'kanan'},{c:'山',r:'さん / やま',m:'gunung'},
+      {c:'川',r:'せん / かわ',m:'sungai'},{c:'田',r:'でん / た',m:'sawah'},{c:'口',r:'こう / くち',m:'mulut'},
+      {c:'目',r:'もく / め',m:'mata'},{c:'手',r:'しゅ / て',m:'tangan'},{c:'見',r:'けん / み',m:'melihat'},
+      {c:'聞',r:'ぶん / き',m:'mendengar'},{c:'読',r:'どく / よ',m:'membaca'},{c:'書',r:'しょ / か',m:'menulis'},
+      {c:'話',r:'わ / はな',m:'berbicara'},{c:'食',r:'しょく / た',m:'makan'},{c:'行',r:'こう / い',m:'pergi'},
+      {c:'来',r:'らい / く',m:'datang'},{c:'出',r:'しゅつ / で',m:'keluar'},{c:'入',r:'にゅう / はい',m:'masuk'},
+      {c:'学',r:'がく',m:'belajar'},{c:'校',r:'こう',m:'sekolah'},{c:'生',r:'せい',m:'hidup'},
+      {c:'先',r:'せん',m:'sebelum'},{c:'年',r:'ねん / とし',m:'tahun'},{c:'時',r:'じ / とき',m:'waktu'},
+      {c:'何',r:'なに / なん',m:'apa'},{c:'国',r:'こく / くに',m:'negara'},{c:'語',r:'ご',m:'bahasa'},
+      {c:'電',r:'でん',m:'listrik'},{c:'車',r:'しゃ / くるま',m:'kendaraan'},{c:'駅',r:'えき',m:'stasiun'}
+    ];
+
+    const STORAGE_KEY = 'jp-writing-progress-v1';
+    const canvases = {};
+    const drawing = {};
+    const animState = { hira: null, kata: null, kanji: null };
+    const currentChar = { hira: 'あ', kata: 'ア', kanji: '日' };
+    const currentMeta = { hira: 'a', kata: 'a', kanji: 'にち / ひ · hari, matahari' };
+
+    function loadProgress() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { counts: {}, mastered: {} };
+      } catch (e) {
+        return { counts: {}, mastered: {} };
+      }
+    }
+    function saveProgress(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+    function getCount(char) {
+      return loadProgress().counts[char] || 0;
+    }
+    function isMastered(char) {
+      return !!loadProgress().mastered[char];
+    }
+    function addCount(char, n) {
+      const p = loadProgress();
+      p.counts[char] = (p.counts[char] || 0) + (n || 1);
+      saveProgress(p);
+      return p.counts[char];
+    }
+    function toggleMaster(char, meta) {
+      const p = loadProgress();
+      if (p.mastered[char]) {
+        delete p.mastered[char];
+      } else {
+        p.mastered[char] = meta || '';
+      }
+      saveProgress(p);
+      return !!p.mastered[char];
+    }
+
+    function updateGlobalStats() {
+      const p = loadProgress();
+      let totalWrites = 0;
+      Object.keys(p.counts).forEach(function(k) { totalWrites += p.counts[k]; });
+      document.getElementById('stat-writes').textContent = totalWrites;
+      document.getElementById('stat-mastered').textContent = Object.keys(p.mastered).length;
+    }
+
+    function updateCharUI(id, char) {
+      const cnt = getCount(char);
+      const el = document.getElementById(id + '-count');
+      if (el) el.textContent = cnt;
+      const btn = document.getElementById(id + '-master-btn');
+      if (btn) {
+        if (isMastered(char)) {
+          btn.textContent = '✓ Lancar';
+          btn.classList.add('done');
+        } else {
+          btn.textContent = 'Tandai Lancar';
+          btn.classList.remove('done');
+        }
+      }
+      // refresh grid badges
+      document.querySelectorAll('#' + id + '-grid .char-btn').forEach(function(b) {
+        const c = b.dataset.char;
+        const n = getCount(c);
+        let badge = b.querySelector('.cnt');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'cnt';
+          b.appendChild(badge);
+        }
+        badge.textContent = n > 0 ? n + '×' : '';
+        b.classList.toggle('mastered', isMastered(c));
+      });
+      updateGlobalStats();
+    }
+
+    function toKvgId(char) {
+      return char.codePointAt(0).toString(16).padStart(5, '0');
+    }
+
+    async function loadStrokeSvg(char, containerId, statusId) {
+      const box = document.getElementById(containerId);
+      const status = document.getElementById(statusId);
+      const id = toKvgId(char);
+      box.innerHTML = '<span class="loading-anim">Memuat animasi…</span>';
+      status.textContent = '';
+
+      const urls = [
+        'https://cdn.jsdelivr.net/gh/KanjiVG/kanjivg@master/kanji/' + id + '.svg',
+        'https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/' + id + '.svg'
+      ];
+      let svgText = null;
+      for (let u = 0; u < urls.length; u++) {
+        try {
+          const res = await fetch(urls[u]);
+          if (res.ok) { svgText = await res.text(); break; }
+        } catch (e) {}
+      }
+      if (!svgText) {
+        box.innerHTML = '<span class="loading-anim">Animasi tidak tersedia</span>';
+        return null;
+      }
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgText, 'image/svg+xml');
+      const svg = doc.querySelector('svg');
+      if (!svg) {
+        box.innerHTML = '<span class="loading-anim">Gagal memuat SVG</span>';
+        return null;
+      }
+      svg.removeAttribute('width');
+      svg.removeAttribute('height');
+      svg.setAttribute('width', '100%');
+      svg.setAttribute('height', '100%');
+      const paths = Array.from(svg.querySelectorAll('path')).filter(function(p) {
+        const d = p.getAttribute('d');
+        return d && d.length > 2;
+      });
+      paths.forEach(function(p) {
+        p.style.fill = 'none';
+        p.style.stroke = '#1a2a4a';
+        p.style.strokeWidth = '3';
+        p.style.strokeLinecap = 'round';
+        p.style.strokeLinejoin = 'round';
+        p.style.opacity = '0';
+      });
+      box.innerHTML = '';
+      box.appendChild(svg);
+      status.textContent = paths.length + ' stroke' + (paths.length > 1 ? 's' : '');
+      return { svg: svg, paths: paths };
+    }
+
+    function animatePaths(paths, statusEl) {
+      if (!paths || !paths.length) return;
+      var i = 0;
+      var speed = 520;
+      paths.forEach(function(p) {
+        p.style.opacity = '0';
+        p.style.transition = 'none';
+        p.style.strokeDasharray = '0';
+        p.style.strokeDashoffset = '0';
+      });
+      function next() {
+        if (i >= paths.length) {
+          if (statusEl) statusEl.textContent = 'Selesai · ' + paths.length + ' stroke';
+          return;
+        }
+        var p = paths[i];
+        var len = 300;
+        try { if (p.getTotalLength) len = p.getTotalLength() || 300; } catch (e) {}
+        p.style.opacity = '1';
+        p.style.strokeDasharray = String(len);
+        p.style.strokeDashoffset = String(len);
+        p.style.transition = 'none';
+        void p.getBoundingClientRect();
+        var dur = Math.min(0.85, 0.22 + len / 450);
+        p.style.transition = 'stroke-dashoffset ' + dur + 's ease-out';
+        p.style.strokeDashoffset = '0';
+        if (statusEl) statusEl.textContent = 'Stroke ' + (i + 1) + ' / ' + paths.length;
+        i++;
+        setTimeout(next, speed);
+      }
+      next();
+    }
+
+    async function selectChar(id, char, meta) {
+      currentChar[id] = char;
+      currentMeta[id] = meta;
+      document.getElementById(id + '-display').textContent = char;
+      document.getElementById(id + '-meta').textContent = meta;
+      document.getElementById(id + '-overlay').textContent = char;
+      clearCanvas(id);
+      document.querySelectorAll('#' + id + '-grid .char-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.char === char);
+      });
+      updateCharUI(id, char);
+      const data = await loadStrokeSvg(char, id + '-anim', id + '-status');
+      animState[id] = data;
+      if (data) setTimeout(function() { playAnim(id); }, 250);
+    }
+
+    function playAnim(id) {
+      const data = animState[id];
+      if (!data || !data.paths) {
+        document.getElementById(id + '-status').textContent = 'Pilih huruf dulu';
+        return;
+      }
+      data.paths.forEach(function(p) {
+        p.style.opacity = '0';
+        p.style.transition = 'none';
+      });
+      animatePaths(data.paths, document.getElementById(id + '-status'));
+    }
+
+    function clearCanvas(id) {
+      const obj = canvases[id];
+      if (!obj) return;
+      obj.ctx.clearRect(0, 0, obj.canvas.width, obj.canvas.height);
+    }
+
+    function toggleGuide(id) {
+      const el = document.getElementById(id + '-overlay');
+      if (el) el.classList.toggle('hidden');
+    }
+
+    function initCanvas(id) {
+      const canvas = document.getElementById(id + '-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      const w = Math.max(280, rect.width || 280);
+      const h = Math.max(280, rect.height || 280);
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#1a2a4a';
+      canvases[id] = { canvas: canvas, ctx: ctx };
+      drawing[id] = false;
+
+      function getPos(e) {
+        const r = canvas.getBoundingClientRect();
+        const src = e.touches ? e.touches[0] : e;
+        return { x: src.clientX - r.left, y: src.clientY - r.top };
+      }
+      function start(e) {
+        e.preventDefault();
+        drawing[id] = true;
+        const p = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+      }
+      function move(e) {
+        if (!drawing[id]) return;
+        e.preventDefault();
+        const p = getPos(e);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+      }
+      function end() { drawing[id] = false; }
+
+      canvas.onmousedown = start;
+      canvas.onmousemove = move;
+      canvas.onmouseup = end;
+      canvas.onmouseleave = end;
+      canvas.ontouchstart = start;
+      canvas.ontouchmove = move;
+      canvas.ontouchend = end;
+    }
+
+    function buildGrid(id, list, isKanji) {
+      const grid = document.getElementById(id + '-grid');
+      grid.innerHTML = '';
+      list.forEach(function(item, i) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'char-btn' + (i === 0 ? ' active' : '');
+        btn.textContent = item.c;
+        btn.dataset.char = item.c;
+        const meta = isKanji ? (item.r + ' · ' + item.m) : item.r;
+        const cnt = getCount(item.c);
+        if (cnt > 0) {
+          const badge = document.createElement('span');
+          badge.className = 'cnt';
+          badge.textContent = cnt + '×';
+          btn.appendChild(badge);
+        }
+        if (isMastered(item.c)) btn.classList.add('mastered');
+        btn.addEventListener('click', function() { selectChar(id, item.c, meta); });
+        grid.appendChild(btn);
+      });
+    }
+
+    function buildExportText() {
+      const p = loadProgress();
+      const lines = [];
+      // order: hira, kata, kanji as in lists
+      function addFrom(list, isKanji) {
+        list.forEach(function(item) {
+          if (p.mastered[item.c] !== undefined) {
+            const back = isKanji ? (item.r + ' | ' + item.m) : item.r;
+            lines.push(item.c + '\t' + back);
+          }
+        });
+      }
+      addFrom(HIRA, false);
+      addFrom(KATA, false);
+      addFrom(KANJI, true);
+      return lines.join('\n');
+    }
+
+    
+    function resetCharProgress(id) {
+      const char = currentChar[id];
+      if (!char) return;
+      if (!confirm('Reset hitungan & status lancar untuk 「' + char + '」?')) return;
+      const p = loadProgress();
+      delete p.counts[char];
+      delete p.mastered[char];
+      saveProgress(p);
+      updateCharUI(id, char);
+    }
+
+    function resetAllProgress() {
+      if (!confirm('Hapus SEMUA progress latihan menulis (hitungan + tanda lancar)?\nTindakan ini tidak bisa dibatalkan.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      ['hira', 'kata', 'kanji'].forEach(function(id) {
+        updateCharUI(id, currentChar[id]);
+        // rebuild badges on grids
+        document.querySelectorAll('#' + id + '-grid .char-btn').forEach(function(b) {
+          b.classList.remove('mastered');
+          const badge = b.querySelector('.cnt');
+          if (badge) badge.textContent = '';
+        });
+      });
+      updateGlobalStats();
+    }
+
+document.addEventListener('DOMContentLoaded', function() {
+      buildGrid('hira', HIRA, false);
+      buildGrid('kata', KATA, false);
+      buildGrid('kanji', KANJI, true);
+      updateGlobalStats();
+
+      document.querySelectorAll('[data-play]').forEach(function(btn) {
+        btn.addEventListener('click', function() { playAnim(btn.getAttribute('data-play')); });
+      });
+      document.querySelectorAll('[data-clear]').forEach(function(btn) {
+        btn.addEventListener('click', function() { clearCanvas(btn.getAttribute('data-clear')); });
+      });
+      document.querySelectorAll('[data-guide]').forEach(function(btn) {
+        btn.addEventListener('click', function() { toggleGuide(btn.getAttribute('data-guide')); });
+      });
+      document.querySelectorAll('[data-count]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const id = btn.getAttribute('data-count');
+          const char = currentChar[id];
+          addCount(char, 1);
+          updateCharUI(id, char);
+          clearCanvas(id);
+        });
+      });
+      document.querySelectorAll('[data-master]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const id = btn.getAttribute('data-master');
+          const char = currentChar[id];
+          const meta = currentMeta[id];
+          toggleMaster(char, meta);
+          updateCharUI(id, char);
+        });
+      });
+
+      document.getElementById('btn-reset-char').addEventListener('click', function() {
+        // detect active tab
+        var active = 'hira';
+        ['hira', 'kata', 'kanji'].forEach(function(id) {
+          if (document.getElementById(id).classList.contains('active')) active = id;
+        });
+        resetCharProgress(active);
+      });
+      document.getElementById('btn-reset-all').addEventListener('click', function() {
+        resetAllProgress();
+      });
+
+      document.getElementById('btn-export-open').addEventListener('click', function() {
+        const panel = document.getElementById('export-panel');
+        panel.hidden = false;
+        document.getElementById('export-text').value = buildExportText() || '';
+        document.getElementById('copy-feedback').textContent = '';
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+      document.getElementById('btn-export-close').addEventListener('click', function() {
+        document.getElementById('export-panel').hidden = true;
+      });
+      document.getElementById('btn-copy-anki').addEventListener('click', function() {
+        const text = document.getElementById('export-text').value;
+        if (!text) {
+          document.getElementById('copy-feedback').textContent = 'Belum ada huruf yang ditandai lancar.';
+          return;
+        }
+        navigator.clipboard.writeText(text).then(function() {
+          document.getElementById('copy-feedback').textContent = 'Tersalin. Paste di Anki (Import / editor kartu).';
+        }).catch(function() {
+          document.getElementById('export-text').select();
+          document.getElementById('copy-feedback').textContent = 'Pilih teks lalu Ctrl+C / Cmd+C.';
+        });
+      });
+      document.getElementById('btn-download-anki').addEventListener('click', function() {
+        const text = document.getElementById('export-text').value;
+        if (!text) {
+          document.getElementById('copy-feedback').textContent = 'Belum ada huruf yang ditandai lancar.';
+          return;
+        }
+        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'anki-kana-kanji.txt';
+        a.click();
+        URL.revokeObjectURL(a.href);
+        document.getElementById('copy-feedback').textContent = 'File diunduh. Import di Anki: File → Import.';
+      });
+
+      setTimeout(function() {
+        initCanvas('hira');
+        initCanvas('kata');
+        initCanvas('kanji');
+        selectChar('hira', 'あ', 'a');
+      }, 120);
+
+      document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setTimeout(function() {
+            ['hira', 'kata', 'kanji'].forEach(function(id) {
+              if (document.getElementById(id).classList.contains('active')) {
+                initCanvas(id);
+                if (!animState[id]) {
+                  selectChar(id, currentChar[id], currentMeta[id]);
+                } else {
+                  updateCharUI(id, currentChar[id]);
+                }
+              }
+            });
+          }, 60);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
