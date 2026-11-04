@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hafalan (Flashcard) | Catatan Bahasa Jepang</title>
+  <meta name="description" content="Mode hafalan flashcard: kana, kosakata, kanji. Target harian dan progress di browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .daily-box {
+      background: linear-gradient(135deg, var(--primary), #2c3e6b);
+      color: #fff; border-radius: var(--radius); padding: 1.15rem 1.25rem;
+      margin-bottom: 1.25rem; box-shadow: var(--shadow);
+    }
+    .daily-box h2 { color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .daily-row { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; align-items: center; }
+    .daily-stat { font-size: 0.9rem; opacity: 0.95; }
+    .daily-stat strong { font-size: 1.25rem; color: var(--gold); }
+    .daily-bar {
+      flex: 1; min-width: 120px; height: 8px; background: rgba(255,255,255,0.2);
+      border-radius: 99px; overflow: hidden;
+    }
+    .daily-bar span {
+      display: block; height: 100%; background: var(--gold); border-radius: 99px;
+      width: 0%; transition: width 0.3s ease;
+    }
+    .deck-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.75rem; margin-bottom: 1.25rem;
+    }
+    .deck-btn {
+      text-align: left; padding: 1rem; border: 1px solid var(--border);
+      border-radius: var(--radius); background: var(--bg-card); cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .deck-btn:hover, .deck-btn.active {
+      border-color: var(--primary); box-shadow: var(--shadow);
+    }
+    .deck-btn strong { display: block; color: var(--primary); margin-bottom: 0.2rem; }
+    .deck-btn span { font-size: 0.8rem; color: var(--text-muted); }
+    .flash-wrap { max-width: 420px; margin: 0 auto; }
+    .flash-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      min-height: 220px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.5rem 1.25rem;
+      cursor: pointer; user-select: none; text-align: center;
+      transition: transform 0.15s;
+    }
+    .flash-card:active { transform: scale(0.98); }
+    .flash-front {
+      font-family: var(--font-serif); font-size: clamp(2.5rem, 12vw, 3.5rem);
+      color: var(--primary); line-height: 1.2;
+    }
+    .flash-front.small {
+      font-size: clamp(1.4rem, 5vw, 1.85rem); font-family: var(--font-sans);
+    }
+    .flash-back {
+      font-size: 1.25rem; color: var(--text); margin-top: 0.5rem;
+    }
+    .flash-hint { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; }
+    .flash-meta {
+      display: flex; justify-content: space-between; font-size: 0.85rem;
+      color: var(--text-muted); margin-bottom: 0.6rem;
+    }
+    .flash-actions {
+      display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; justify-content: center;
+    }
+    .target-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+      margin: 0.75rem 0 1rem; font-size: 0.9rem;
+    }
+    .target-row select, .target-row input {
+      padding: 0.35rem 0.5rem; border-radius: 6px; border: 1px solid var(--border);
+    }
+    .hidden { display: none !important; }
+    .session-done {
+      text-align: center; padding: 1.5rem; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">日本語<span>Notes</span></a>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav">
+        <a href="index.html">Beranda</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="kana.html">Kana</a>
+        <a href="writing.html">Menulis</a>
+        <a href="hafalan.html" class="active">Hafalan</a>
+        <a href="quiz.html">Kuis</a>
+        <a href="lessons.html">Minna</a>
+        <a href="vocab.html">Vocab</a>
+        <a href="grammar.html">Grammar</a>
+        <a href="kanji.html">Kanji</a>
+        <a href="notes.html">Catatan</a>
+        <a href="resources.html">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Hafalan</h1>
+        <p class="lead mb-2">Flashcard: lihat → ingat → balik kartu. Tanpa skor; fokus mengulang. Target harian membantu konsisten.</p>
+
+        <div class="daily-box">
+          <h2>Target hari ini</h2>
+          <div class="daily-row">
+            <div class="daily-stat">Sesi: <strong id="daily-done">0</strong> / <strong id="daily-goal">30</strong> kartu</div>
+            <div class="daily-bar"><span id="daily-fill"></span></div>
+            <div class="daily-stat" id="daily-status">Belum mulai</div>
+          </div>
+          <div class="target-row" style="margin:0.75rem 0 0;opacity:0.95;">
+            <label>Ubah target
+              <select id="goal-select">
+                <option value="20">20 / hari</option>
+                <option value="30" selected>30 / hari</option>
+                <option value="50">50 / hari</option>
+                <option value="100">100 / hari</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div id="setup">
+          <h3 class="mb-1">Pilih deck</h3>
+          <div class="deck-grid" id="deck-list">
+            <button type="button" class="deck-btn active" data-deck="hira"><strong>Hiragana</strong><span id="c-hira">—</span></button>
+            <button type="button" class="deck-btn" data-deck="kata"><strong>Katakana</strong><span id="c-kata">—</span></button>
+            <button type="button" class="deck-btn" data-deck="vocab"><strong>Kosakata N5</strong><span id="c-vocab">—</span></button>
+            <button type="button" class="deck-btn" data-deck="kanji"><strong>Kanji N5</strong><span id="c-kanji">—</span></button>
+          </div>
+          <div class="target-row">
+            <label>Jumlah kartu sesi
+              <select id="session-size">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="30">30</option>
+                <option value="0">Semua (acak 50 max)</option>
+              </select>
+            </label>
+            <label>
+              <input type="checkbox" id="only-weak" checked>
+              Prioritaskan yang belum hafal
+            </label>
+          </div>
+          <button type="button" class="btn btn-primary" id="btn-start">Mulai sesi</button>
+        </div>
+
+        <div id="play" class="flash-wrap hidden">
+          <div class="flash-meta">
+            <span id="sess-progress">1 / 20</span>
+            <span id="sess-known">Hafal sesi: 0</span>
+          </div>
+          <div class="flash-card" id="card" title="Klik untuk balik">
+            <div class="flash-front" id="card-front">あ</div>
+            <div class="flash-back hidden" id="card-back">a</div>
+            <div class="flash-hint" id="card-hint">Ketuk kartu untuk lihat jawaban</div>
+          </div>
+          <div class="flash-actions">
+            <button type="button" class="btn btn-outline" id="btn-flip">Balik</button>
+            <button type="button" class="btn btn-outline" id="btn-again">Belum hafal</button>
+            <button type="button" class="btn btn-primary" id="btn-know">Sudah hafal</button>
+            <button type="button" class="btn btn-outline btn-sm" id="btn-end">Akhiri</button>
+          </div>
+        </div>
+
+        <div id="done" class="session-done hidden">
+          <h3>Sesi selesai</h3>
+          <p class="muted" id="done-msg"></p>
+          <div class="btn-row" style="justify-content:center;margin-top:1rem;">
+            <button type="button" class="btn btn-primary" id="btn-again-session">Sesi lagi</button>
+            <button type="button" class="btn btn-outline" id="btn-to-setup">Ganti deck</button>
+          </div>
+        </div>
+
+        <div class="card mt-2">
+          <h3>Cara pakai</h3>
+          <ol style="padding-left:1.2rem;color:var(--text-muted);font-size:0.95rem;">
+            <li>Pilih deck → mulai sesi (default 20 kartu).</li>
+            <li>Coba ingat jawaban → ketuk kartu / <strong>Balik</strong>.</li>
+            <li><strong>Sudah hafal</strong> atau <strong>Belum hafal</strong> (belum hafal akan lebih sering muncul lagi).</li>
+            <li>Target harian naik setiap kartu yang kamu review (bukan hanya yang “sudah hafal”).</li>
+          </ol>
+          <p class="small muted mb-0">Progress &amp; target tersimpan di browser ini. Beda perangkat = progress terpisah.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p>Catatan Bahasa Jepang · Hafalan</p></div>
+  </footer>
+  <script src="js/main.js"></script>
+  <script>
+
+    const HIRA = [
+      ['あ','a'],
+      ['い','i'],
+      ['う','u'],
+      ['え','e'],
+      ['お','o'],
+      ['か','ka'],
+      ['き','ki'],
+      ['く','ku'],
+      ['け','ke'],
+      ['こ','ko'],
+      ['さ','sa'],
+      ['し','shi'],
+      ['す','su'],
+      ['せ','se'],
+      ['そ','so'],
+      ['た','ta'],
+      ['ち','chi'],
+      ['つ','tsu'],
+      ['て','te'],
+      ['と','to'],
+      ['な','na'],
+      ['に','ni'],
+      ['ぬ','nu'],
+      ['ね','ne'],
+      ['の','no'],
+      ['は','ha'],
+      ['ひ','hi'],
+      ['ふ','fu'],
+      ['へ','he'],
+      ['ほ','ho'],
+      ['ま','ma'],
+      ['み','mi'],
+      ['む','mu'],
+      ['め','me'],
+      ['も','mo'],
+      ['や','ya'],
+      ['ゆ','yu'],
+      ['よ','yo'],
+      ['ら','ra'],
+      ['り','ri'],
+      ['る','ru'],
+      ['れ','re'],
+      ['ろ','ro'],
+      ['わ','wa'],
+      ['を','wo'],
+      ['ん','n'],
+      ['が','ga'],
+      ['ぎ','gi'],
+      ['ぐ','gu'],
+      ['げ','ge'],
+      ['ご','go'],
+      ['ざ','za'],
+      ['じ','ji'],
+      ['ず','zu'],
+      ['ぜ','ze'],
+      ['ぞ','zo'],
+      ['だ','da'],
+      ['で','de'],
+      ['ど','do'],
+      ['ば','ba'],
+      ['び','bi'],
+      ['ぶ','bu'],
+      ['べ','be'],
+      ['ぼ','bo'],
+      ['ぱ','pa'],
+      ['ぴ','pi'],
+      ['ぷ','pu'],
+      ['ぺ','pe'],
+      ['ぽ','po']
+    ];
+    const KATA = [
+      ['ア','a'],
+      ['イ','i'],
+      ['ウ','u'],
+      ['エ','e'],
+      ['オ','o'],
+      ['カ','ka'],
+      ['キ','ki'],
+      ['ク','ku'],
+      ['ケ','ke'],
+      ['コ','ko'],
+      ['サ','sa'],
+      ['シ','shi'],
+      ['ス','su'],
+      ['セ','se'],
+      ['ソ','so'],
+      ['タ','ta'],
+      ['チ','chi'],
+      ['ツ','tsu'],
+      ['テ','te'],
+      ['ト','to'],
+      ['ナ','na'],
+      ['ニ','ni'],
+      ['ヌ','nu'],
+      ['ネ','ne'],
+      ['ノ','no'],
+      ['ハ','ha'],
+      ['ヒ','hi'],
+      ['フ','fu'],
+      ['ヘ','he'],
+      ['ホ','ho'],
+      ['マ','ma'],
+      ['ミ','mi'],
+      ['ム','mu'],
+      ['メ','me'],
+      ['モ','mo'],
+      ['ヤ','ya'],
+      ['ユ','yu'],
+      ['ヨ','yo'],
+      ['ラ','ra'],
+      ['リ','ri'],
+      ['ル','ru'],
+      ['レ','re'],
+      ['ロ','ro'],
+      ['ワ','wa'],
+      ['ヲ','wo'],
+      ['ン','n'],
+      ['ガ','ga'],
+      ['ギ','gi'],
+      ['グ','gu'],
+      ['ゲ','ge'],
+      ['ゴ','go'],
+      ['ザ','za'],
+      ['ジ','ji'],
+      ['ズ','zu'],
+      ['ゼ','ze'],
+      ['ゾ','zo'],
+      ['ダ','da'],
+      ['デ','de'],
+      ['ド','do'],
+      ['バ','ba'],
+      ['ビ','bi'],
+      ['ブ','bu'],
+      ['ベ','be'],
+      ['ボ','bo'],
+      ['パ','pa'],
+      ['ピ','pi'],
+      ['プ','pu'],
+      ['ペ','pe'],
+      ['ポ','po']
+    ];
+    const VOCAB = [
+      ['わたし','saya'],
+      ['あなた','kamu'],
+      ['かれ','dia (laki-laki)'],
+      ['かのじょ','dia (perempuan)'],
+      ['ひと','orang'],
+      ['みなさん','semuanya'],
+      ['かた','orang (sopan)'],
+      ['だれ','siapa'],
+      ['せんせい','guru'],
+      ['がくせい','siswa / mahasiswa'],
+      ['かいしゃいん','karyawan'],
+      ['しゅふ','ibu rumah tangga'],
+      ['いしゃ','dokter'],
+      ['かんごし','perawat'],
+      ['エンジニア','insinyur'],
+      ['べんごし','pengacara'],
+      ['にほんじん','orang Jepang'],
+      ['アメリカじん','orang Amerika'],
+      ['ともだち','teman'],
+      ['かれし','pacar (laki)'],
+      ['かぞく','keluarga'],
+      ['りょうしん','orang tua'],
+      ['ちち','ayah (milik sendiri)'],
+      ['はは','ibu (milik sendiri)'],
+      ['おとうさん','ayah'],
+      ['おかあさん','ibu'],
+      ['あに','kakak laki-laki'],
+      ['あね','kakak perempuan'],
+      ['おとうと','adik laki-laki'],
+      ['いもうと','adik perempuan'],
+      ['子ども','anak'],
+      ['おとこのこ','anak laki-laki'],
+      ['おんなのこ','anak perempuan'],
+      ['にほん','Jepang'],
+      ['とうきょう','Tokyo'],
+      ['うち','rumah'],
+      ['いえ','rumah'],
+      ['がっこう','sekolah'],
+      ['だいがく','universitas'],
+      ['かいしゃ','perusahaan'],
+      ['びょういん','rumah sakit'],
+      ['ぎんこう','bank'],
+      ['ゆうびんきょく','kantor pos'],
+      ['えき','stasiun'],
+      ['くうこう','bandara'],
+      ['コンビニ','minimarket'],
+      ['スーパー','supermarket'],
+      ['デパート','department store'],
+      ['レストラン','restoran'],
+      ['ホテル','hotel'],
+      ['みせ','toko'],
+      ['ほんや','toko buku'],
+      ['はなや','toko bunga'],
+      ['こうえん','taman'],
+      ['としょかん','perpustakaan'],
+      ['びじゅつかん','museum'],
+      ['えいがかん','bioskop'],
+      ['きっさてん','kafe'],
+      ['トイレ','toilet'],
+      ['へや','kamar'],
+      ['だいどころ','dapur'],
+      ['ふろ','kamar mandi'],
+      ['にわ','halaman'],
+      ['まち','kota'],
+      ['くに','negara'],
+      ['ばしょ','tempat'],
+      ['いま','sekarang'],
+      ['きょう','hari ini'],
+      ['あした','besok'],
+      ['きのう','kemarin'],
+      ['あさ','pagi'],
+      ['ひる','siang'],
+      ['ばん','malam'],
+      ['よる','malam'],
+      ['まいにち','setiap hari'],
+      ['まいあさ','setiap pagi'],
+      ['まいばん','setiap malam'],
+      ['まいしゅう','setiap minggu'],
+      ['まいとし','setiap tahun'],
+      ['せんしゅう','minggu lalu'],
+      ['こんしゅう','minggu ini'],
+      ['らいしゅう','minggu depan'],
+      ['せんげつ','bulan lalu'],
+      ['こんげつ','bulan ini'],
+      ['らいげつ','bulan depan'],
+      ['きょねん','tahun lalu'],
+      ['ことし','tahun ini'],
+      ['らいねん','tahun depan'],
+      ['やすみ','libur'],
+      ['たんじょうび','ulang tahun'],
+      ['げつようび','Senin'],
+      ['かようび','Selasa'],
+      ['すいようび','Rabu'],
+      ['もくようび','Kamis'],
+      ['きんようび','Jumat'],
+      ['どようび','Sabtu'],
+      ['にちようび','Minggu'],
+      ['いちがつ','Januari'],
+      ['にがつ','Februari'],
+      ['さんがつ','Maret'],
+      ['しがつ','April'],
+      ['ごがつ','Mei'],
+      ['ろくがつ','Juni'],
+      ['しちがつ','Juli'],
+      ['はちがつ','Agustus'],
+      ['くがつ','September'],
+      ['じゅうがつ','Oktober'],
+      ['じゅういちがつ','November'],
+      ['じゅうにがつ','Desember'],
+      ['しゅうまつ','akhir pekan'],
+      ['ひるやすみ','istirahat siang'],
+      ['いくつ','berapa (benda)'],
+      ['いくら','berapa harga'],
+      ['なんじ','jam berapa'],
+      ['なんにん','berapa orang'],
+      ['いち','satu'],
+      ['に','dua'],
+      ['さん','tiga'],
+      ['よん','empat'],
+      ['ご','lima'],
+      ['ろく','enam'],
+      ['なな','tujuh'],
+      ['はち','delapan'],
+      ['きゅう','sembilan'],
+      ['じゅう','sepuluh'],
+      ['ひゃく','seratus'],
+      ['せん','seribu'],
+      ['まん','sepuluh ribu'],
+      ['はん','setengah'],
+      ['ぐらい','kira-kira'],
+      ['もの','benda'],
+      ['ほん','buku'],
+      ['ざっし','majalah'],
+      ['しんぶん','koran'],
+      ['じしょ','kamus'],
+      ['ノート','buku catatan'],
+      ['しゅくだい','PR / pekerjaan rumah'],
+      ['てがみ','surat'],
+      ['カード','kartu'],
+      ['えんぴつ','pensil'],
+      ['ペン','pena'],
+      ['ボールペン','bolpoin'],
+      ['シャープペンシル','mechanical pencil'],
+      ['かみ','kertas'],
+      ['はさみ','gunting'],
+      ['かさ','payung'],
+      ['かぎ','kunci'],
+      ['かばん','tas'],
+      ['さいふ','dompet'],
+      ['とけい','jam'],
+      ['めがね','kacamata'],
+      ['くつ','sepatu'],
+      ['くつした','kaus kaki'],
+      ['ふく','pakaian'],
+      ['シャツ','kemeja'],
+      ['Tシャツ','kaos'],
+      ['ズボン','celana'],
+      ['スカート','rok'],
+      ['コート','mantel'],
+      ['ぼうし','topi'],
+      ['テレビ','TV'],
+      ['ラジオ','radio'],
+      ['カメラ','kamera'],
+      ['コンピューター','komputer'],
+      ['パソコン','PC'],
+      ['スマホ','smartphone'],
+      ['でんわ','telepon'],
+      ['けいたい','HP'],
+      ['テーブル','meja makan'],
+      ['つくえ','meja'],
+      ['いす','kursi'],
+      ['ベッド','tempat tidur'],
+      ['たんす','lemari'],
+      ['れいぞうこ','kulkas'],
+      ['エアコン','AC'],
+      ['でんき','listrik / lampu'],
+      ['みず','air'],
+      ['おちゃ','teh'],
+      ['コーヒー','kopi'],
+      ['ぎゅうにゅう','susu'],
+      ['ジュース','jus'],
+      ['ビール','bir'],
+      ['おさけ','minuman beralkohol'],
+      ['ごはん','nasi / makanan'],
+      ['あさごはん','sarapan'],
+      ['ひるごはん','makan siang'],
+      ['ばんごはん','makan malam'],
+      ['パン','roti'],
+      ['たまご','telur'],
+      ['にく','daging'],
+      ['さかな','ikan'],
+      ['やさい','sayur'],
+      ['くだもの','buah'],
+      ['りんご','apel'],
+      ['みかん','jeruk'],
+      ['バナナ','pisang'],
+      ['しお','garam'],
+      ['さとう','gula'],
+      ['あぶら','minyak'],
+      ['でんしゃ','kereta'],
+      ['ちかてつ','subway'],
+      ['バス','bus'],
+      ['タクシー','taksi'],
+      ['くるま','mobil'],
+      ['じてんしゃ','sepeda'],
+      ['ひこうき','pesawat'],
+      ['ふね','kapal'],
+      ['きっぷ','tiket'],
+      ['まど','jendela'],
+      ['ドア','pintu'],
+      ['いきます','pergi'],
+      ['きます','datang'],
+      ['かえります','pulang'],
+      ['たべます','makan'],
+      ['のみます','minum'],
+      ['みます','melihat / menonton'],
+      ['ききます','mendengar / bertanya'],
+      ['よみます','membaca'],
+      ['かきます','menulis'],
+      ['はなします','berbicara'],
+      ['します','melakukan'],
+      ['べんきょうします','belajar'],
+      ['れんしゅうします','berlatih'],
+      ['はたらきます','bekerja'],
+      ['やすみます','istirahat'],
+      ['おきます','bangun'],
+      ['ねます','tidur'],
+      ['かいます','membeli'],
+      ['うります','menjual'],
+      ['とります','mengambil / memotret'],
+      ['まちます','menunggu'],
+      ['とめます','berhenti / menghentikan'],
+      ['あるきます','berjalan kaki'],
+      ['はしります','berlari'],
+      ['あそびます','bermain'],
+      ['つくります','membuat'],
+      ['つかいます','menggunakan'],
+      ['あけます','membuka'],
+      ['しめます','menutup'],
+      ['おしえます','mengajar / memberitahu'],
+      ['ならいます','belajar (dari orang)'],
+      ['わかります','mengerti'],
+      ['あります','ada (benda)'],
+      ['います','ada (makhluk hidup)'],
+      ['すいます','merokok / menghirup'],
+      ['きります','memotong'],
+      ['あげます','memberi'],
+      ['もらいます','menerima'],
+      ['かします','meminjamkan'],
+      ['かります','meminjam'],
+      ['でかけます','keluar (pergi)'],
+      ['つきます','tiba'],
+      ['のります','naik (kendaraan)'],
+      ['おります','turun (kendaraan)'],
+      ['いれます','memasukkan'],
+      ['だします','mengeluarkan'],
+      ['うたいます','menyanyi'],
+      ['おどります','menari'],
+      ['りょうりします','memasak'],
+      ['せんたくします','mencuci baju'],
+      ['そうじします','membersihkan'],
+      ['シャワーをあびます','mandi (shower)'],
+      ['なります','menjadi'],
+      ['呼びます','memanggil'],
+      ['見せます','memperlihatkan'],
+      ['おおきい','besar'],
+      ['ちいさい','kecil'],
+      ['あたらしい','baru'],
+      ['ふるい','lama'],
+      ['いい','bagus'],
+      ['わるい','buruk'],
+      ['たかい','mahal / tinggi'],
+      ['やすい','murah'],
+      ['ひくい','rendah'],
+      ['あつい','panas (cuaca/benda)'],
+      ['さむい','dingin (cuaca)'],
+      ['つめたい','dingin (benda)'],
+      ['あたたかい','hangat'],
+      ['むずかしい','sulit'],
+      ['やさしい','mudah / baik hati'],
+      ['おもしろい','menarik'],
+      ['つまらない','membosankan'],
+      ['おいしい','enak'],
+      ['まずい','tidak enak'],
+      ['きれい','cantik / bersih'],
+      ['げんき','sehat / semangat'],
+      ['しずか','tenang'],
+      ['にぎやか','ramai'],
+      ['ゆうめい','terkenal'],
+      ['しんせつ','baik hati'],
+      ['べんり','praktis'],
+      ['ふべん','tidak praktis'],
+      ['すてき','bagus / keren'],
+      ['だいすき','sangat suka'],
+      ['すき','suka'],
+      ['きらい','tidak suka'],
+      ['じょうず','pandai'],
+      ['へた','tidak pandai'],
+      ['ほしい','ingin (benda)'],
+      ['忙しい','sibuk'],
+      ['ひま','luang'],
+      ['楽しい','menyenangkan'],
+      ['うれしい','senang'],
+      ['かなしい','sedih'],
+      ['すごい','hebat'],
+      ['かわいい','imut'],
+      ['かっこいい','keren'],
+      ['なに','apa'],
+      ['なん','apa'],
+      ['どこ','di mana'],
+      ['いつ','kapan'],
+      ['どう','bagaimana'],
+      ['どんな','seperti apa'],
+      ['どれ','yang mana'],
+      ['どちら','yang mana (sopan)'],
+      ['なぜ','mengapa'],
+      ['どうして','mengapa'],
+      ['はい','ya'],
+      ['いいえ','tidak'],
+      ['すみません','permisi / maaf'],
+      ['ありがとう','terima kasih'],
+      ['どうぞ','silakan'],
+      ['どうも','terima kasih (ringkas)'],
+      ['こんにちは','halo (siang)'],
+      ['おはようございます','selamat pagi'],
+      ['こんばんは','selamat malam'],
+      ['さようなら','selamat tinggal'],
+      ['また','lagi'],
+      ['もう','sudah / lagi'],
+      ['まだ','masih / belum'],
+      ['とても','sangat'],
+      ['ちょっと','sedikit'],
+      ['すこし','sedikit'],
+      ['たくさん','banyak'],
+      ['みんな','semua'],
+      ['いつも','selalu'],
+      ['よく','sering / dengan baik'],
+      ['ときどき','kadang-kadang'],
+      ['ぜんぜん','sama sekali (dengan negatif)'],
+      ['ほんとう','benar / sungguh'],
+      ['たぶん','mungkin'],
+      ['きっと','pasti'],
+      ['ぜひ','pasti / dengan senang hati'],
+      ['すぐ','segera'],
+      ['あとで','nanti'],
+      ['さき','tadi / ujung'],
+      ['まえ','sebelum / depan'],
+      ['うしろ','belakang'],
+      ['となり','sebelah'],
+      ['そば','dekat'],
+      ['ちかく','dekat'],
+      ['とおく','jauh'],
+      ['なか','dalam'],
+      ['そと','luar'],
+      ['うえ','atas'],
+      ['した','bawah'],
+      ['あいだ','antara'],
+      ['よこ','samping'],
+      ['これ','ini'],
+      ['それ','itu'],
+      ['あれ','itu (jauh)'],
+      ['この','~ ini'],
+      ['その','~ itu'],
+      ['あの','~ itu (jauh)'],
+      ['どの','~ yang mana'],
+      ['ここ','sini'],
+      ['そこ','situ'],
+      ['あそこ','sana'],
+      ['だれの','milik siapa'],
+      ['じかん','waktu / jam'],
+      ['しゅみ','hobi'],
+      ['しごと','pekerjaan'],
+      ['りょこう','perjalanan'],
+      ['りょかん','penginapan Jepang'],
+      ['おみやげ','oleh-oleh'],
+      ['しゃしん','foto'],
+      ['え','gambar'],
+      ['おんがく','musik'],
+      ['えいが','film'],
+      ['スポーツ','olahraga'],
+      ['サッカー','sepak bola'],
+      ['テニス','tenis'],
+      ['やきゅう','baseball'],
+      ['バスケットボール','basket'],
+      ['あめ','hujan'],
+      ['ゆき','salju'],
+      ['くもり','berawan'],
+      ['はれ','cerah'],
+      ['かぜ','angin / pilek'],
+      ['てんき','cuaca'],
+      ['きせつ','musim'],
+      ['はる','semi'],
+      ['なつ','panas'],
+      ['あき','gugur'],
+      ['ふゆ','dingin'],
+      ['いろ','warna'],
+      ['あか','merah'],
+      ['あお','biru'],
+      ['しろ','putih'],
+      ['くろ','hitam'],
+      ['きいろ','kuning'],
+      ['ちゃいろ','cokelat'],
+      ['ピンク','pink'],
+      ['もんだい','masalah / soal'],
+      ['しつもん','pertanyaan'],
+      ['こたえ','jawaban'],
+      ['いみ','arti'],
+      ['ことば','kata'],
+      ['れい','contoh'],
+      ['れんしゅう','latihan'],
+      ['テスト','tes'],
+      ['しけん','ujian'],
+      ['せいせき','nilai'],
+      ['じゅぎょう','kelas / pelajaran'],
+      ['おきゃくさん','tamu / pelanggan'],
+      ['しゃちょう','presiden direktur'],
+      ['ぶちょう','kepala bagian'],
+      ['かかりのひと','petugas'],
+      ['となりのひと','orang di sebelah'],
+      ['ぼく','saya (laki-laki)'],
+      ['おれ','saya (kasual laki)'],
+      ['しょうがっこう','SD'],
+      ['ちゅうがっこう','SMP'],
+      ['こうこう','SMA'],
+      ['ようちえん','TK'],
+      ['ほいくえん','daycare'],
+      ['きょうかい','gereja'],
+      ['てら','kuil Buddha'],
+      ['じんじゃ','kuil Shinto'],
+      ['たいいくかん','gedung olahraga'],
+      ['プール','kolam renang'],
+      ['うみ','laut'],
+      ['いけ','danau'],
+      ['はし','jembatan / sumpit'],
+      ['みち','jalan'],
+      ['かど','pojok'],
+      ['こうさてん','persimpangan'],
+      ['しんごう','lampu lalu lintas'],
+      ['ちず','peta'],
+      ['あんないじょ','pusat informasi'],
+      ['りょう','asrama'],
+      ['アパート','apartemen'],
+      ['マンション','apartemen mewah'],
+      ['おてあらい','toilet'],
+      ['カーテン','tirai'],
+      ['せんぷうき','kipas angin'],
+      ['ストーブ','pemanas'],
+      ['でんしレンジ','microwave'],
+      ['せんたくき','mesin cuci'],
+      ['そうじき','vacuum cleaner'],
+      ['アイロン','setrika'],
+      ['かお','wajah'],
+      ['はな','hidung / bunga'],
+      ['くち','mulut'],
+      ['は','gigi / daun'],
+      ['のど','tenggorokan'],
+      ['せ','punggung / tinggi badan'],
+      ['おなか','perut'],
+      ['むね','dada'],
+      ['ゆび','jari'],
+      ['つめ','kuku'],
+      ['ねつ','demam'],
+      ['せき','batuk'],
+      ['くすり','obat'],
+      ['しゃりん','roda'],
+      ['ガソリン','bensin'],
+      ['うんてん','mengemudi'],
+      ['うんてんしゅ','sopir'],
+      ['じょうしゃ','naik kendaraan'],
+      ['しゅっぱつ','berangkat'],
+      ['とうちゃく','tiba'],
+      ['よやく','reservasi'],
+      ['うけつけ','resepsionis'],
+      ['きんえん','dilarang merokok'],
+      ['きんし','larangan'],
+      ['むりょう','gratis'],
+      ['ゆうりょう','berbayar'],
+      ['ひらきます','buka (toko)'],
+      ['しまります','tutup (toko)'],
+      ['はじめます','mulai'],
+      ['おわります','selesai'],
+      ['つづけます','melanjutkan'],
+      ['やめます','berhenti'],
+      ['きめます','memutuskan'],
+      ['しらべます','mencari / meneliti'],
+      ['かんがえます','berpikir'],
+      ['しります','mengetahui'],
+      ['おもいます','berpikir / berpendapat'],
+      ['いいます','berkata'],
+      ['つたえます','menyampaikan'],
+      ['たのみます','meminta'],
+      ['てつだいます','membantu'],
+      ['みがきます','menggosok (gigi)'],
+      ['あらいます','mencuci'],
+      ['ふきます','mengelap'],
+      ['はらいます','membayar'],
+      ['もどります','kembali'],
+      ['さんぽします','jalan-jalan'],
+      ['りょこうします','bepergian'],
+      ['けっこんします','menikah'],
+      ['そつぎょうします','lulus'],
+      ['うんどうします','berolahraga'],
+      ['しょくじします','makan (santap)'],
+      ['つとめます','bekerja di'],
+      ['やといます','mempekerjakan'],
+      ['すばらしい','luar biasa'],
+      ['たいせつ','penting'],
+      ['だいじょうぶ','tidak apa-apa'],
+      ['へん','aneh'],
+      ['らく','mudah / lega'],
+      ['たいへん','berat / susah'],
+      ['しんぱい','khawatir'],
+      ['あんしん','tenang / lega'],
+      ['ざんねん','sayang sekali'],
+      ['当然','wajar'],
+      ['とくに','terutama'],
+      ['たとえば','misalnya'],
+      ['いろいろ','berbagai'],
+      ['ほか','lain'],
+      ['だけ','hanya'],
+      ['しか','hanya (dengan negatif)'],
+      ['も','juga'],
+      ['ずっと','terus / jauh lebih'],
+      ['やっと','akhirnya'],
+      ['まず','pertama-tama'],
+      ['それから','setelah itu'],
+      ['そして','lalu'],
+      ['でも','tetapi'],
+      ['しかし','tetapi'],
+      ['だから','karena itu'],
+      ['ですから','karena itu (sopan)'],
+      ['それに','selain itu'],
+      ['または','atau'],
+      ['わたしの','milik saya'],
+      ['あなたの','milik kamu'],
+      ['みんなの','milik semua'],
+      ['じぶん','diri sendiri'],
+      ['おなじ','sama'],
+      ['ちがいます','berbeda'],
+      ['だいたい','kira-kira'],
+      ['やく','sekitar'],
+      ['ちょうど','tepat'],
+      ['ほとんど','hampir semua'],
+      ['ぜんぶ','semua'],
+      ['ひとつ','satu buah'],
+      ['ふたつ','dua buah'],
+      ['みっつ','tiga buah'],
+      ['よっつ','empat buah'],
+      ['いつつ','lima buah'],
+      ['むっつ','enam buah'],
+      ['ななつ','tujuh buah'],
+      ['やっつ','delapan buah'],
+      ['ここのつ','sembilan buah'],
+      ['とお','sepuluh buah'],
+      ['ひとり','satu orang'],
+      ['ふたり','dua orang'],
+      ['さい','tahun (umur)'],
+      ['ふん','menit'],
+      ['びょう','detik'],
+      ['キロ','kilo'],
+      ['グラム','gram'],
+      ['メートル','meter'],
+      ['ページ','halaman']
+    ];
+    const KANJI = [
+      ['一','satu'],
+      ['二','dua'],
+      ['三','tiga'],
+      ['四','empat'],
+      ['五','lima'],
+      ['六','enam'],
+      ['七','tujuh'],
+      ['八','delapan'],
+      ['九','sembilan'],
+      ['十','sepuluh'],
+      ['百','seratus'],
+      ['千','seribu'],
+      ['万','sepuluh ribu'],
+      ['円','yen'],
+      ['時','waktu / jam'],
+      ['日','hari / matahari'],
+      ['月','bulan'],
+      ['火','api'],
+      ['水','air'],
+      ['木','pohon'],
+      ['金','emas / uang'],
+      ['土','tanah'],
+      ['人','orang'],
+      ['男','laki-laki'],
+      ['女','perempuan'],
+      ['子','anak'],
+      ['父','ayah'],
+      ['母','ibu'],
+      ['友','teman'],
+      ['口','mulut'],
+      ['目','mata'],
+      ['耳','telinga'],
+      ['手','tangan'],
+      ['足','kaki'],
+      ['頭','kepala'],
+      ['体','tubuh'],
+      ['心','hati'],
+      ['力','kekuatan'],
+      ['大','besar'],
+      ['小','kecil'],
+      ['中','tengah'],
+      ['上','atas'],
+      ['下','bawah'],
+      ['左','kiri'],
+      ['右','kanan'],
+      ['前','depan'],
+      ['後','belakang'],
+      ['外','luar'],
+      ['内','dalam'],
+      ['間','antara'],
+      ['東','timur'],
+      ['西','barat'],
+      ['南','selatan'],
+      ['北','utara'],
+      ['名','nama'],
+      ['山','gunung'],
+      ['川','sungai'],
+      ['田','sawah'],
+      ['天','langit'],
+      ['気','udara / semangat'],
+      ['空','langit / kosong'],
+      ['雨','hujan'],
+      ['電','listrik'],
+      ['車','kendaraan'],
+      ['駅','stasiun'],
+      ['社','perusahaan / kuil'],
+      ['校','sekolah'],
+      ['学','belajar'],
+      ['先','sebelum'],
+      ['生','hidup'],
+      ['年','tahun'],
+      ['午','siang'],
+      ['今','sekarang'],
+      ['何','apa'],
+      ['行','pergi'],
+      ['来','datang'],
+      ['出','keluar'],
+      ['入','masuk'],
+      ['見','melihat'],
+      ['聞','mendengar'],
+      ['読','membaca'],
+      ['書','menulis'],
+      ['話','berbicara'],
+      ['語','bahasa'],
+      ['食','makan'],
+      ['飲','minum'],
+      ['買','membeli'],
+      ['立','berdiri'],
+      ['休','istirahat'],
+      ['会','bertemu'],
+      ['国','negara'],
+      ['文','kalimat / tulisan'],
+      ['本','buku'],
+      ['半','setengah'],
+      ['毎','setiap'],
+      ['週','minggu'],
+      ['曜','hari (dalam minggu)'],
+      ['分','menit'],
+      ['高','tinggi / mahal'],
+      ['安','murah / aman'],
+      ['新','baru'],
+      ['古','lama'],
+      ['多','banyak'],
+      ['少','sedikit'],
+      ['長','panjang'],
+      ['白','putih'],
+      ['青','biru'],
+      ['赤','merah'],
+      ['花','bunga']
+    ];
+
+    const DECKS = {
+      hira: { data: HIRA, label: 'Hiragana', frontBig: true },
+      kata: { data: KATA, label: 'Katakana', frontBig: true },
+      vocab: { data: VOCAB, label: 'Kosakata', frontBig: false },
+      kanji: { data: KANJI, label: 'Kanji', frontBig: true }
+    };
+
+    const STORE = 'jp-hafalan-v1';
+
+    function todayKey() {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    }
+
+    function loadStore() {
+      try {
+        return JSON.parse(localStorage.getItem(STORE)) || {};
+      } catch (e) { return {}; }
+    }
+    function saveStore(s) {
+      localStorage.setItem(STORE, JSON.stringify(s));
+    }
+
+    function getKnownMap(deck) {
+      const s = loadStore();
+      if (!s.known) s.known = {};
+      if (!s.known[deck]) s.known[deck] = {};
+      return s.known[deck];
+    }
+
+    function setKnown(deck, front, known) {
+      const s = loadStore();
+      if (!s.known) s.known = {};
+      if (!s.known[deck]) s.known[deck] = {};
+      if (known) s.known[deck][front] = 1;
+      else delete s.known[deck][front];
+      saveStore(s);
+    }
+
+    function getDaily() {
+      const s = loadStore();
+      const key = todayKey();
+      if (!s.daily || s.daily.date !== key) {
+        s.daily = { date: key, count: 0, goal: (s.daily && s.daily.goal) || 30 };
+        saveStore(s);
+      }
+      return s.daily;
+    }
+
+    function addDaily(n) {
+      const s = loadStore();
+      const key = todayKey();
+      if (!s.daily || s.daily.date !== key) {
+        s.daily = { date: key, count: 0, goal: (s.daily && s.daily.goal) || 30 };
+      }
+      s.daily.count += n;
+      saveStore(s);
+      return s.daily;
+    }
+
+    function setGoal(g) {
+      const s = loadStore();
+      if (!s.daily) s.daily = { date: todayKey(), count: 0, goal: g };
+      s.daily.goal = g;
+      // keep date
+      if (s.daily.date !== todayKey()) {
+        s.daily.date = todayKey();
+        s.daily.count = 0;
+      }
+      saveStore(s);
+      refreshDailyUI();
+    }
+
+    function refreshDailyUI() {
+      const d = getDaily();
+      document.getElementById('daily-done').textContent = d.count;
+      document.getElementById('daily-goal').textContent = d.goal;
+      const pct = Math.min(100, Math.round((d.count / d.goal) * 100));
+      document.getElementById('daily-fill').style.width = pct + '%';
+      const st = document.getElementById('daily-status');
+      if (d.count >= d.goal) st.textContent = 'Target tercapai ✓';
+      else if (d.count === 0) st.textContent = 'Belum mulai';
+      else st.textContent = (d.goal - d.count) + ' lagi';
+      const sel = document.getElementById('goal-select');
+      if (sel && String(d.goal) !== sel.value) {
+        if ([...sel.options].some(o => o.value === String(d.goal))) sel.value = String(d.goal);
+      }
+    }
+
+    function countKnown(deck) {
+      return Object.keys(getKnownMap(deck)).length;
+    }
+
+    function refreshDeckCounts() {
+      Object.keys(DECKS).forEach(function(k) {
+        const total = DECKS[k].data.length;
+        const known = countKnown(k);
+        const el = document.getElementById('c-' + k);
+        if (el) el.textContent = known + ' / ' + total + ' hafal';
+      });
+    }
+
+    let state = {
+      deck: 'hira',
+      queue: [],
+      index: 0,
+      flipped: false,
+      sessionKnown: 0,
+      sessionReviews: 0
+    };
+
+    function shuffle(a) {
+      const arr = a.slice();
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+      }
+      return arr;
+    }
+
+    function buildQueue() {
+      const deck = state.deck;
+      const data = DECKS[deck].data;
+      const known = getKnownMap(deck);
+      const onlyWeak = document.getElementById('only-weak').checked;
+      let size = parseInt(document.getElementById('session-size').value, 10);
+      if (size === 0) size = 50;
+
+      let pool = data.map(function(p) {
+        return { front: p[0], back: p[1], known: !!known[p[0]] };
+      });
+      if (onlyWeak) {
+        const weak = pool.filter(function(x) { return !x.known; });
+        if (weak.length >= Math.min(size, 5)) pool = weak;
+        // if almost all known, mix a bit
+        else pool = shuffle(pool);
+      }
+      pool = shuffle(pool);
+      return pool.slice(0, Math.min(size, pool.length));
+    }
+
+    function showView(name) {
+      ['setup', 'play', 'done'].forEach(function(id) {
+        document.getElementById(id).classList.toggle('hidden', id !== name);
+      });
+    }
+
+    function renderCard() {
+      const item = state.queue[state.index];
+      if (!item) return finishSession();
+      state.flipped = false;
+      const front = document.getElementById('card-front');
+      const back = document.getElementById('card-back');
+      front.textContent = item.front;
+      back.textContent = item.back;
+      back.classList.add('hidden');
+      front.classList.toggle('small', !DECKS[state.deck].frontBig);
+      document.getElementById('card-hint').textContent = 'Ketuk kartu untuk lihat jawaban';
+      document.getElementById('sess-progress').textContent = (state.index + 1) + ' / ' + state.queue.length;
+      document.getElementById('sess-known').textContent = 'Hafal sesi: ' + state.sessionKnown;
+    }
+
+    function flipCard() {
+      state.flipped = true;
+      document.getElementById('card-back').classList.remove('hidden');
+      document.getElementById('card-hint').textContent = 'Pilih: Sudah hafal / Belum hafal';
+    }
+
+    function mark(known) {
+      const item = state.queue[state.index];
+      if (!item) return;
+      setKnown(state.deck, item.front, known);
+      if (known) state.sessionKnown++;
+      state.sessionReviews++;
+      addDaily(1);
+      refreshDailyUI();
+
+      // if not known, maybe re-queue later in session (simple: push near end)
+      if (!known && state.queue.length < 80) {
+        const copy = { front: item.front, back: item.back, known: false };
+        const insertAt = Math.min(state.index + 3 + Math.floor(Math.random() * 4), state.queue.length);
+        state.queue.splice(insertAt, 0, copy);
+      }
+
+      state.index++;
+      if (state.index >= state.queue.length) finishSession();
+      else renderCard();
+    }
+
+    function finishSession() {
+      refreshDeckCounts();
+      const d = getDaily();
+      let msg = 'Kamu review ' + state.sessionReviews + ' kartu. Ditandai hafal di sesi ini: ' + state.sessionKnown + '.';
+      if (d.count >= d.goal) msg += ' Target harian tercapai.';
+      else msg += ' Progress hari ini: ' + d.count + ' / ' + d.goal + '.';
+      document.getElementById('done-msg').textContent = msg;
+      showView('done');
+    }
+
+    function startSession() {
+      state.queue = buildQueue();
+      state.index = 0;
+      state.sessionKnown = 0;
+      state.sessionReviews = 0;
+      if (!state.queue.length) {
+        alert('Deck kosong.');
+        return;
+      }
+      showView('play');
+      renderCard();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      refreshDailyUI();
+      refreshDeckCounts();
+
+      document.querySelectorAll('.deck-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.deck-btn').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          state.deck = btn.getAttribute('data-deck');
+        });
+      });
+
+      document.getElementById('goal-select').addEventListener('change', function() {
+        setGoal(parseInt(this.value, 10));
+      });
+      document.getElementById('btn-start').addEventListener('click', startSession);
+      document.getElementById('card').addEventListener('click', function() {
+        if (!state.flipped) flipCard();
+      });
+      document.getElementById('btn-flip').addEventListener('click', function() {
+        if (!state.flipped) flipCard();
+      });
+      document.getElementById('btn-again').addEventListener('click', function() { mark(false); });
+      document.getElementById('btn-know').addEventListener('click', function() { mark(true); });
+      document.getElementById('btn-end').addEventListener('click', finishSession);
+      document.getElementById('btn-again-session').addEventListener('click', startSession);
+      document.getElementById('btn-to-setup').addEventListener('click', function() {
+        refreshDeckCounts();
+        showView('setup');
+      });
+    });
+  </script>
+</body>
+</html>
